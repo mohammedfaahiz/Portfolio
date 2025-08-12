@@ -13,6 +13,9 @@
     --secondary: #00f0ff;
     --accent: #8b5cf6;
     --text-light: #e5e7eb;
+    --header-gradient: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    --name-gradient: linear-gradient(90deg, #ffffff, #f0f9ff, #e0e7ff);
+    --subtitle-color: rgba(255, 255, 255, 0.85);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -22,23 +25,41 @@ body {
     line-height: 1.6;
 }
 header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: var(--header-gradient);
     padding: 5rem 2rem;
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.1), transparent 70%),
+                radial-gradient(circle at 70% 50%, rgba(0, 240, 255, 0.08), transparent 70%);
+    pointer-events: none;
 }
 header h1 {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    background: var(--name-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
 }
 header .typewriter {
     font-size: 1.2rem;
-    opacity: 0.9;
+    color: var(--subtitle-color);
     margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
 }
 .container {
     max-width: 1100px;
@@ -150,29 +171,42 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 0.9rem;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    header .typewriter {
+        font-size: 1rem;
+    }
+    .container {
+        padding: 2rem 1rem;
+    }
+}
 </style>
 </head>
 <body>
 <header>
     <h1>Mohammed Faahiz</h1>
-    <div class="typewriter">Backend Engineer | 3 Years Experience | Tech Enthusiast</div>
+    <div class="typewriter">Software Engineer | 3 Years Experience | Tech Enthusiast</div>
 </header>
 <div class="container">
     <!-- About -->
     <section id="about" class="section">
         <h2>About Me</h2>
         <div class="card">
-            <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices. I’m passionate about solving complex problems, writing clean code, and creating systems that scale gracefully.</p>
+            <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices. I'm passionate about solving complex problems, writing clean code, and creating systems that scale gracefully.</p>
         </div>
     </section>
     <!-- Highlights -->
     <section id="highlights" class="section">
         <h2>Career Highlights</h2>
         <div class="highlights-grid">
-            <div class="card highlight-card"><i class="fas fa-rocket"></i><h3>Performance Boost</h3><p>Improved system speed by 40% via API optimization & caching.</p></div>
-            <div class="card highlight-card"><i class="fas fa-cogs"></i><h3>Microservices Delivery</h3><p>Designed & deployed 10+ cloud-based microservices.</p></div>
-            <div class="card highlight-card"><i class="fas fa-cloud"></i><h3>Cloud Migration</h3><p>Migrated legacy systems to Azure with zero downtime.</p></div>
-            <div class="card highlight-card"><i class="fas fa-users"></i><h3>Team Collaboration</h3><p>Worked with teams across 3 time zones to deliver projects.</p></div>
+            <div class="card highlight-card"><i class="fas fa-rocket"></i><h3>Performance Optimization</h3><p>Transformed sluggish APIs into lightning-fast responses through strategic caching and database query optimization.</p></div>
+            <div class="card highlight-card"><i class="fas fa-cogs"></i><h3>Microservices Architecture</h3><p>Built scalable distributed systems that handle high traffic loads with seamless service communication.</p></div>
+            <div class="card highlight-card"><i class="fas fa-cloud"></i><h3>Zero-Downtime Deployments</h3><p>Orchestrated smooth cloud migrations and continuous deployment pipelines without service interruptions.</p></div>
+            <div class="card highlight-card"><i class="fas fa-code"></i><h3>Clean Code Advocate</h3><p>Champion of maintainable, testable code with comprehensive documentation and robust error handling.</p></div>
         </div>
     </section>
     <!-- Toolbox -->
