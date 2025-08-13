@@ -157,11 +157,21 @@ header .typewriter {
     gap: 1.5rem;
     margin-top: 2rem;
 }
+.contact-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
 .contact-card i {
     font-size: 1.8rem;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--primary);
 }
 /* Footer */
 footer {
@@ -249,9 +259,31 @@ footer {
     <section id="contact" class="section">
         <h2>Get in Touch</h2>
         <div class="contact-grid">
-            <div class="card contact-card"><i class="fab fa-github"></i><h3>GitHub</h3><a href="https://github.com/mohammedfaahiz">Mohammed Faahiz</a></div>
-            <div class="card contact-card"><i class="fab fa-linkedin"></i><h3>LinkedIn</h3><a href="https://linkedin.com/in/mohammedfaahiz">Mohammed Faahiz</a></div>
-            <div class="card contact-card"><i class="fab fa-instagram"></i><h3>Instagram</h3><a href="https://instagram.com/mohammedfaahiz11">MohammedFaahiz</a></div>
+            <a href="https://github.com/mohammedfaahiz" target="_blank" class="card contact-card">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p>Mohammed Faahiz</p>
+            </a>
+            <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" class="card contact-card">
+                <i class="fab fa-linkedin"></i>
+                <h3>LinkedIn</h3>
+                <p>Mohammed Faahiz</p>
+            </a>
+            <a href="https://instagram.com/mohammedfaahiz11" target="_blank" class="card contact-card">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>MohammedFaahiz</p>
+            </a>
+            <a href="mailto:mohdfaahiz3565@gmail.com" class="card contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>mohammedfaahiz</p>
+            </a>
+            <a href="tel:+919900445476" class="card contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+919900445476</p>
+            </a>
         </div>
     </section>
 </div>
