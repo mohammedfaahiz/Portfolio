@@ -85,19 +85,9 @@ header .typewriter {
     transform: translateY(-5px);
     box-shadow: 0 0 20px var(--primary);
 }
-/* Highlights */
-.highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-.highlight-card i {
-    font-size: 2rem;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
+a.card {
+    text-decoration: none;
+    color: inherit;
 }
 /* Toolbox */
 .toolbox-grid {
@@ -209,52 +199,44 @@ footer {
             <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices. I'm passionate about solving complex problems, writing clean code, and creating systems that scale gracefully.</p>
         </div>
     </section>
-    <!-- Highlights -->
-    <section id="highlights" class="section">
-        <h2>Career Highlights</h2>
-        <div class="highlights-grid">
-            <div class="card highlight-card"><i class="fas fa-rocket"></i><h3>Performance Optimization</h3><p>Transformed sluggish APIs into lightning-fast responses through strategic caching and database query optimization.</p></div>
-            <div class="card highlight-card"><i class="fas fa-cogs"></i><h3>Microservices Architecture</h3><p>Built scalable distributed systems that handle high traffic loads with seamless service communication.</p></div>
-            <div class="card highlight-card"><i class="fas fa-cloud"></i><h3>Zero-Downtime Deployments</h3><p>Orchestrated smooth cloud migrations and continuous deployment pipelines without service interruptions.</p></div>
-            <div class="card highlight-card"><i class="fas fa-code"></i><h3>Clean Code Advocate</h3><p>Champion of maintainable, testable code with comprehensive documentation and robust error handling.</p></div>
-        </div>
-    </section>
+
     <!-- Toolbox -->
     <section id="toolbox" class="section">
         <h2>Tech Toolbox</h2>
         <div class="toolbox-grid">
             <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg"><span>.NET Core</span></div>
             <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"><span>SQL Server</span></div>
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"><span>Docker</span></div>
             <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"><span>Azure</span></div>
             <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"><span>Angular</span></div>
             <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"><span>Git</span></div>
         </div>
     </section>
+
     <!-- Projects -->
     <section id="projects" class="section">
         <h2>Featured Projects</h2>
         <div class="projects">
-            <div class="card project">
+            <a href="https://www.mybill.ae" target="_blank" class="card project">
                 <img src="img/onebill.png" alt="OneBill">
                 <h3>OneBill</h3>
                 <p>Full-stack utilities platform with smart meter tracking.</p>
                 <div class="project-tags"><span class="tag">Angular</span><span class="tag">.NET Core</span></div>
-            </div>
-            <div class="card project">
+            </a>
+            <a href="https://www.ensmart.ae" target="_blank" class="card project">
                 <img src="img/Ensmart.png" alt="Ensmart">
                 <h3>Ensmart</h3>
                 <p>Energy monitoring platform for analyzing smart meter data.</p>
                 <div class="project-tags"><span class="tag">ASP.NET</span><span class="tag">MVC</span></div>
-            </div>
-            <div class="card project">
+            </a>
+            <a href="https://www.smartbill.ae" target="_blank" class="card project">
                 <img src="img/smartbill.png" alt="Smart Bill">
                 <h3>Smart Bill</h3>
                 <p>Windows-based monitoring & billing solution.</p>
                 <div class="project-tags"><span class="tag">.NET Framework</span><span class="tag">SQL SERVER</span></div>
-            </div>
+            </a>
         </div>
     </section>
+
     <!-- Contact -->
     <section id="contact" class="section">
         <h2>Get in Touch</h2>
