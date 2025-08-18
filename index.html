@@ -140,6 +140,49 @@ a.card {
     padding: 0.2rem 0.6rem;
     border-radius: 12px;
 }
+/* Resume Tabs */
+.resume-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text-light);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.tab-btn.active,
+.tab-btn:hover {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: 0 0 12px var(--primary);
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.tab-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tab-content th, .tab-content td {
+  padding: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: left;
+}
+.tab-content th {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
 /* Contact */
 .contact-grid {
     display: grid;
@@ -171,7 +214,6 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 0.9rem;
 }
-
 /* Responsive */
 @media (max-width: 768px) {
     header h1 {
@@ -236,6 +278,52 @@ footer {
         </div>
     </section>
 
+    <!-- Resume -->
+    <section id="resume" class="section">
+      <h2>Resume</h2>
+      <div class="resume-tabs">
+        <button class="tab-btn active" data-tab="education">Education</button>
+        <button class="tab-btn" data-tab="experience">Work Experience</button>
+      </div>
+      <div class="resume-content">
+        <!-- Education -->
+        <div id="education" class="tab-content active card">
+          <table>
+            <tr>
+              <th>Year</th>
+              <th>Degree</th>
+              <th>Institution</th>
+            </tr>
+            <tr>
+              <td>2018-2022</td>
+              <td>Master's in Computer Application - (MCA)</td>
+              <td>Visvesvaraya Technological University</td>
+            </tr>
+            <tr>
+              <td>2015-2018</td>
+              <td>Bachelor's in Computer Application - (BCA)</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <!-- Work Experience -->
+        <div id="experience" class="tab-content card">
+          <table>
+            <tr>
+              <th>Year</th>
+              <th>Role</th>
+              <th>Company</th>
+            </tr>
+            <tr>
+              <td>2022 - Present</td>
+              <td>Software Engineer</td>
+              <td>Raasoft Infotech Pvt Ltd</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="section">
         <h2>Get in Touch</h2>
@@ -271,5 +359,20 @@ footer {
 <footer>
     <p>&copy; 2025 Mohammed Faahiz | All Rights Reserved</p>
 </footer>
+
+<script>
+  const tabs = document.querySelectorAll(".tab-btn");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(btn => btn.classList.remove("active"));
+      tab.classList.add("active");
+
+      contents.forEach(c => c.classList.remove("active"));
+      document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+  });
+</script>
 </body>
 </html>
