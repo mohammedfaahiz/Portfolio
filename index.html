@@ -9,12 +9,17 @@
 :root {
     --bg: #0d1117;
     --card-bg: rgba(255, 255, 255, 0.05);
-    --primary: #39ff14;
-    --secondary: #00f0ff;
-    --accent: #8b5cf6;
+    --primary: #00ff94;   /* bright teal green */
+    --secondary: #00cfff; /* aqua blue */
+    --accent: #ffb800;    /* golden accent */
     --text-light: #e5e7eb;
-    --header-gradient: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    --name-gradient: linear-gradient(90deg, #ffffff, #f0f9ff, #e0e7ff);
+
+    /* lighter, fresher header gradient */
+    --header-gradient: linear-gradient(135deg, #1f2937, #111827, #0d1117);
+
+    /* softer name gradient for H1 */
+    --name-gradient: linear-gradient(90deg, #00ff94, #00cfff, #00ffa5);
+
     --subtitle-color: rgba(255, 255, 255, 0.85);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,17 +45,17 @@ header::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.1), transparent 70%),
-                radial-gradient(circle at 70% 50%, rgba(0, 240, 255, 0.08), transparent 70%);
+    background: radial-gradient(circle at 30% 50%, rgba(0, 255, 148, 0.12), transparent 70%),
+                radial-gradient(circle at 70% 50%, rgba(0, 207, 255, 0.1), transparent 70%);
     pointer-events: none;
 }
 header h1 {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: var(--name-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 2px 10px rgba(0, 255, 148, 0.2);
     position: relative;
     z-index: 1;
 }
@@ -204,7 +209,7 @@ a.card {
 }
 .contact-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px var(--primary);
+    box-shadow: 0 0 20px var(--accent);
 }
 /* Footer */
 footer {
