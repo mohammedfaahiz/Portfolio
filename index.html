@@ -21,6 +21,9 @@
     --subtitle-color: rgba(255, 255, 255, 0.85);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+    scroll-behavior: smooth; /* ✅ Smooth scrolling */
+}
 body {
     font-family: 'Open Sans', sans-serif;
     background: var(--bg);
@@ -215,15 +218,48 @@ a.card { text-decoration: none; color: inherit; }
           <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices.</p>
         </div>
     </section>
+    <section id="toolbox" class="section">
+        <h2>Tech Stack</h2>
+        <div class="card">
+          <p>.NET | SQL Server | Azure | Microservices | REST APIs</p>
+        </div>
+    </section>
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="card">
+          <p>Coming soon...</p>
+        </div>
+    </section>
+    <section id="resume" class="section">
+        <h2>Resume</h2>
+        <div class="card">
+          <p><a href="#">Download Resume</a></p>
+        </div>
+    </section>
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <div class="card">
+          <p>Email: faahiz@example.com</p>
+        </div>
+    </section>
 </div>
 
 <script>
 const toggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
+const navItems = document.querySelectorAll("#nav-links a");
 
 toggle.addEventListener("click", () => {
   toggle.classList.toggle("active");
   navLinks.classList.toggle("active");
+});
+
+// ✅ Close mobile menu after clicking a link
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    toggle.classList.remove("active");
+    navLinks.classList.remove("active");
+  });
 });
 </script>
 </body>
