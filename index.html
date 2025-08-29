@@ -26,6 +26,7 @@ body {
     background: var(--bg);
     color: var(--text-light);
     line-height: 1.6;
+    padding-top: 70px;
 }
 /* Navbar */
 .navbar {
@@ -35,11 +36,59 @@ body {
     width: 100%;
     background: rgba(13,17,23,0.9);
     backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
     z-index: 1000;
 }
+.nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+.logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    background: var(--name-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hamburger Animation */
+.menu-toggle {
+    display: none;
+    width: 30px;
+    height: 22px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.menu-toggle span {
+    background: var(--text-light);
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 3px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+.menu-toggle span:nth-child(1) { top: 0; }
+.menu-toggle span:nth-child(2) { top: 9px; }
+.menu-toggle span:nth-child(3) { top: 18px; }
+
+/* Animate into X */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
 .navbar ul {
     list-style: none;
     display: flex;
@@ -52,7 +101,24 @@ body {
     transition: color 0.3s;
 }
 .navbar a:hover { color: var(--primary); }
-body { padding-top: 70px; }
+
+/* Mobile Navbar */
+@media (max-width: 768px) {
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(13,17,23,0.95);
+        padding: 1rem;
+        text-align: center;
+    }
+    .navbar ul.active { display: flex; }
+    .menu-toggle { display: block; }
+}
+
 /* Header */
 header {
     background: var(--header-gradient);
@@ -115,188 +181,50 @@ header .typewriter {
 }
 .card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--primary); }
 a.card { text-decoration: none; color: inherit; }
-/* Toolbox */
-.toolbox-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
-.toolbox-item { text-align: center; transition: transform 0.3s ease, box-shadow 0.3s; }
-.toolbox-item img { width: 50px; height: 50px; object-fit: contain; }
-.toolbox-item span { display: block; font-size: 0.85rem; margin-top: 0.3rem; }
-.toolbox-item:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--secondary); }
-/* Projects */
-.projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-.project img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-.project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.6rem; }
-.tag { background: linear-gradient(90deg, var(--primary), var(--secondary)); color: #fff; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; }
-/* Resume */
-.resume-section { margin-top: 3rem; }
-.resume-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-.resume-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-family: 'Montserrat', sans-serif; }
-.resume-card ul { margin-left: 1.2rem; }
-.resume-card ul li { margin-bottom: 0.4rem; }
-/* Contact */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.contact-card { display: block; text-decoration: none; color: inherit; transition: all 0.3s ease; }
-.contact-card i { font-size: 1.8rem; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.contact-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--accent); }
-/* Footer */
-footer { text-align: center; padding: 1.5rem 0; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
-/* Responsive */
-@media (max-width: 768px) {
-    .resume-grid { grid-template-columns: 1fr; }
-    header h1 { font-size: 2.5rem; }
-    header .typewriter { font-size: 1rem; }
-    .container { padding: 2rem 1rem; }
-}
 </style>
 </head>
 <body>
 <nav class="navbar">
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#toolbox">Tech Toolbox</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-container">
+    <div class="logo">MF</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#toolbox">Tech Stack</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </nav>
+
 <header>
     <h1>Mohammed Faahiz</h1>
     <div class="typewriter">Software Engineer | Tech Enthusiast</div>
 </header>
+
+<!-- Example container -->
 <div class="container">
-    <!-- About -->
     <section id="about" class="section">
         <h2>About Me</h2>
         <div class="card">
-        <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable and reliable backend solutions in .NET, SQL Server, and cloud-based microservices. Passionate about clean code and dependable systems, I love exploring new tech and, when I’m not coding, you’ll likely find me gaming 🎮 or working on side projects.</p>
-    </section>
-
-    <!-- Toolbox -->
-    <section id="toolbox" class="section">
-        <h2>Tech Toolbox</h2>
-        <div class="toolbox-grid">
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core"><span>.NET Core</span></div>
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server"><span>SQL Server</span></div>
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"><span>Azure</span></div>
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"><span>Angular</span></div>
-            <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="section">
-        <h2>Featured Projects</h2>
-        <div class="projects">
-            <a href="https://www.mybill.ae" target="_blank" class="card project">
-                <img src="img/onebill.png" alt="OneBill Project" loading="lazy">
-                <h3>OneBill</h3>
-                <p>Full-stack utilities platform with smart meter tracking.</p>
-                <div class="project-tags"><span class="tag">Angular</span><span class="tag">.NET Core</span></div>
-            </a>
-            <a href="https://www.ensmart.ae" target="_blank" class="card project">
-                <img src="img/Ensmart.png" alt="Ensmart Project" loading="lazy">
-                <h3>Ensmart</h3>
-                <p>Energy monitoring platform for analyzing smart meter data.</p>
-                <div class="project-tags"><span class="tag">ASP.NET</span><span class="tag">MVC</span></div>
-            </a>
-            <a href="https://www.smartbill.ae" target="_blank" class="card project">
-                <img src="img/smartbill.png" alt="Smart Bill Project" loading="lazy">
-                <h3>Smart Bill</h3>
-                <p>Windows-based monitoring & billing solution.</p>
-                <div class="project-tags"><span class="tag">.NET Framework</span><span class="tag">SQL SERVER</span></div>
-            </a>
-        </div>
-    </section>
-
-    <!-- Resume -->
-    <section id="resume" class="section resume-section">
-      <h2>Resume</h2>
-      <div class="resume-grid">
-        <div class="resume-card card">
-          <h3>Education</h3>
-          <ul>
-            <li><strong>MCA</strong> - Visvesvaraya Technological University (2018–2022)</li>
-            <li><strong>BCA</strong> - Mangalore University (2015–2018)</li>
-          </ul>
-        </div>
-        <div class="resume-card card">
-          <h3>Work Experience</h3>
-          <ul>
-            <li><strong>Software Engineer</strong> - Raasoft Infotech Pvt Ltd (2022–Present)<br>
-              Developing backend solutions with .NET Core, SQL Server, and Azure. Worked on smart meter platforms and microservices.
-            </li>
-          </ul>
-        </div>
-        <div class="resume-card card">
-          <h3>Skills</h3>
-          <ul>
-            <li><strong>Backend:</strong> .NET Core, ASP.NET, REST APIs</li>
-            <li><strong>Databases:</strong> SQL Server, MySQL</li>
-            <li><strong>Frontend:</strong> Angular, HTML/CSS/JS</li>
-            <li><strong>Cloud & Tools:</strong> Azure, Git, Docker</li>
-          </ul>
-        </div>
-        <div class="resume-card card">
-          <h3>Certifications</h3>
-          <ul>
-            <li>coming soon...</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section">
-        <h2>Get in Touch</h2>
-        <div class="contact-grid">
-            <a href="https://github.com/mohammedfaahiz" target="_blank" class="card contact-card">
-                <i class="fab fa-github"></i>
-                <h3>GitHub</h3>
-                <p>Mohammed Faahiz</p>
-            </a>
-            <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" class="card contact-card">
-                <i class="fab fa-linkedin"></i>
-                <h3>LinkedIn</h3>
-                <p>Mohammed Faahiz</p>
-            </a>
-            <a href="https://instagram.com/mohammedfaahiz11" target="_blank" class="card contact-card">
-                <i class="fab fa-instagram"></i>
-                <h3>Instagram</h3>
-                <p>MohammedFaahiz</p>
-            </a>
-            <a href="mailto:mohdfaahiz3565@gmail.com" class="card contact-card">
-                <i class="fas fa-envelope"></i>
-                <h3>Email</h3>
-                <p>mohdfaahiz3565@gmail.com</p>
-            </a>
-            <a href="tel:+919900445476" class="card contact-card">
-                <i class="fas fa-phone"></i>
-                <h3>Phone</h3>
-                <p>+919900445476</p>
-            </a>
+          <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices.</p>
         </div>
     </section>
 </div>
-<footer>
-    <p>&copy; 2025 Mohammed Faahiz | All Rights Reserved</p>
-</footer>
+
+<script>
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+toggle.addEventListener("click", () => {
+  toggle.classList.toggle("active");
+  navLinks.classList.toggle("active");
+});
+</script>
 </body>
 </html>
