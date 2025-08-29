@@ -13,13 +13,8 @@
     --secondary: #00cfff; /* aqua blue */
     --accent: #ffb800;    /* golden accent */
     --text-light: #e5e7eb;
-
-    /* lighter, fresher header gradient */
     --header-gradient: linear-gradient(135deg, #1f2937, #111827, #0d1117);
-
-    /* softer name gradient for H1 */
     --name-gradient: linear-gradient(90deg, #00ff94, #00cfff, #00ffa5);
-
     --subtitle-color: rgba(255, 255, 255, 0.85);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -150,6 +145,7 @@ a.card {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 .tab-btn {
   padding: 0.6rem 1.2rem;
@@ -173,6 +169,7 @@ a.card {
 .tab-content.active {
   display: block;
 }
+/* Resume Tables */
 .tab-content table {
   width: 100%;
   border-collapse: collapse;
@@ -187,6 +184,29 @@ a.card {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 600;
+}
+/* Timeline */
+.timeline {
+  list-style: none;
+  padding-left: 1rem;
+  border-left: 2px solid var(--primary);
+}
+.timeline li {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.timeline li::before {
+  content: "●";
+  position: absolute;
+  left: -1.1rem;
+  color: var(--secondary);
+  font-size: 1.2rem;
+}
+.timeline .date {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  display: block;
+  margin-bottom: 0.3rem;
 }
 /* Contact */
 .contact-grid {
@@ -289,42 +309,44 @@ footer {
       <div class="resume-tabs">
         <button class="tab-btn active" data-tab="education">Education</button>
         <button class="tab-btn" data-tab="experience">Work Experience</button>
+        <button class="tab-btn" data-tab="skills">Skills</button>
+        <button class="tab-btn" data-tab="certifications">Certifications</button>
       </div>
       <div class="resume-content">
         <!-- Education -->
         <div id="education" class="tab-content active card">
           <table>
-            <tr>
-              <th>Year</th>
-              <th>Degree</th>
-              <th>Institution</th>
-            </tr>
-            <tr>
-              <td>2018-2022</td>
-              <td>Master's in Computer Application - (MCA)</td>
-              <td>Visvesvaraya Technological University</td>
-            </tr>
-            <tr>
-              <td>2015-2018</td>
-              <td>Bachelor's in Computer Application - (BCA)</td>
-              <td>Mangalore University</td>
-            </tr>
+            <tr><th>Year</th><th>Degree</th><th>Institution</th></tr>
+            <tr><td>2018-2022</td><td>Master's in Computer Application (MCA)</td><td>Visvesvaraya Technological University</td></tr>
+            <tr><td>2015-2018</td><td>Bachelor's in Computer Application (BCA)</td><td>Mangalore University</td></tr>
           </table>
         </div>
-        <!-- Work Experience -->
+        <!-- Work Experience Timeline -->
         <div id="experience" class="tab-content card">
-          <table>
-            <tr>
-              <th>Year</th>
-              <th>Role</th>
-              <th>Company</th>
-            </tr>
-            <tr>
-              <td>2022 - Present</td>
-              <td>Software Engineer</td>
-              <td>Raasoft Infotech Pvt Ltd</td>
-            </tr>
-          </table>
+          <ul class="timeline">
+            <li>
+              <span class="date">2022 - Present</span>
+              <h3>Software Engineer - Raasoft Infotech Pvt Ltd</h3>
+              <p>Developing backend solutions with .NET Core, SQL Server, and Azure. 
+              Worked on smart meter platforms and cloud microservices.</p>
+            </li>
+          </ul>
+        </div>
+        <!-- Skills -->
+        <div id="skills" class="tab-content card">
+          <ul>
+            <li><strong>Backend:</strong> .NET Core, ASP.NET, REST APIs</li>
+            <li><strong>Databases:</strong> SQL Server, MySQL</li>
+            <li><strong>Frontend:</strong> Angular, HTML/CSS/JS</li>
+            <li><strong>Cloud & Tools:</strong> Azure, Git, Docker</li>
+          </ul>
+        </div>
+        <!-- Certifications -->
+        <div id="certifications" class="tab-content card">
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
         </div>
       </div>
     </section>
