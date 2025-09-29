@@ -36,8 +36,11 @@ header {
   padding: 6rem 2rem 4rem;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #fff;
-  background-attachment: fixed;
   background-size: cover;
+  background-attachment: scroll; /* default safe for mobile */
+}
+@media(min-width:769px){
+  header {background-attachment: fixed;}
 }
 header h1 {
   font-size: 3rem;
