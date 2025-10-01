@@ -15,7 +15,22 @@
   --text: #1f2937;
   --muted: #6b7280;
   --radius: 1rem;
+  --header-gradient: linear-gradient(135deg, #2563eb, #06b6d4);
+  --border: #e5e7eb;
 }
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --primary: #60a5fa;
+  --secondary: #22d3ee;
+  --accent: #fbbf24;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --header-gradient: linear-gradient(135deg, #1e3a8a, #0e7490);
+  --border: #334155;
+}
+
 * {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family: 'Inter', system-ui, sans-serif;
@@ -24,6 +39,64 @@ body {
   line-height: 1.7;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-btn {
+  width: 60px;
+  height: 30px;
+  background: var(--primary);
+  border-radius: 50px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+[data-theme="dark"] .theme-toggle-slider {
+  transform: translateX(30px);
 }
 
 /* Animations */
@@ -34,21 +107,26 @@ body {
 header {
   text-align: center;
   padding: 6rem 2rem 4rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: var(--header-gradient);
   color: #fff;
   background-size: cover;
-  background-attachment: scroll; /* default safe for mobile */
+  background-attachment: scroll;
+  position: relative;
 }
+
 @media(min-width:769px){
   header {background-attachment: fixed;}
 }
+
 header h1 {
   font-size: 3rem;
   font-weight: 800;
 }
+
 header p {
   font-size: 1.2rem;
   margin-top: 0.5rem;
+  opacity: 0.95;
 }
 
 /* Sections */
@@ -57,6 +135,7 @@ section {
   max-width: 1100px;
   margin: auto;
 }
+
 section h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -70,11 +149,21 @@ section h2 {
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 1px solid var(--border);
 }
+
+[data-theme="dark"] .card {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 /* Toolbox */
@@ -84,8 +173,10 @@ section h2 {
   gap: 1.5rem;
   justify-content: center;
 }
+
 .toolbox-item {text-align:center;flex:0 1 100px;}
-.toolbox-item img {width: 50px;height: 50px;}
+.toolbox-item img {width: 50px;height: 50px;filter: grayscale(0);transition: filter 0.3s ease;}
+[data-theme="dark"] .toolbox-item img {filter: brightness(0.9);}
 .toolbox-item span {display:block;margin-top:0.5rem;font-size:0.9rem;color:var(--muted);}
 
 /* Projects */
@@ -94,33 +185,102 @@ section h2 {
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
   gap: 1.5rem;
 }
+
+.projects a {text-decoration: none; color: inherit;}
 .project img {width:100%;height:180px;object-fit:cover;border-radius:0.8rem;margin-bottom:0.8rem;}
 .project h3 {margin:0.5rem 0;color:var(--primary);}
-.project-tags {display:flex;flex-wrap:wrap;gap:0.4rem;}
+.project p {color: var(--text);}
+.project-tags {display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem;}
 .tag {background: var(--primary);font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:9999px;color:#fff;}
 
 /* Resume */
 .resume-tabs {display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
-.tab-btn {background: var(--card-bg);border:1px solid var(--muted);padding:0.7rem 1.2rem;border-radius: 9999px;color: var(--muted);cursor:pointer;transition:0.3s;}
-.tab-btn.active, .tab-btn:hover {background: var(--primary);color:#fff;border:none;}
+.tab-btn {
+  background: var(--card-bg);
+  border:1px solid var(--border);
+  padding:0.7rem 1.2rem;
+  border-radius: 9999px;
+  color: var(--muted);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  background: var(--primary);
+  color:#fff;
+  border:1px solid var(--primary);
+}
+
 .tab-content {display:none;}
 .tab-content.active {display:block;}
+
+/* Table Styling */
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+table tr {
+  border-bottom:1px solid var(--border);
+}
+
+table tr:first-child {
+  border-bottom:2px solid var(--primary);
+}
+
+table th {
+  text-align:left;
+  padding:0.8rem;
+  font-weight:600;
+  color: var(--text);
+}
+
+table td {
+  padding:0.8rem;
+  color: var(--text);
+}
 
 /* Experience List */
 .experience-list {list-style:none;padding:0;margin:0;}
 .experience-list li {margin-bottom:1.5rem;}
 .experience-list .date {font-size:0.9rem;color:var(--secondary);margin-bottom:0.3rem;display:block;}
-.experience-list h3 {margin:0.2rem 0;}
+.experience-list h3 {margin:0.2rem 0;color: var(--text);}
+.experience-list p {color: var(--muted);}
+
+/* Skills List */
+.tab-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tab-content ul li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.tab-content ul li:last-child {
+  border-bottom: none;
+}
 
 /* Contact */
 .contact-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;}
+.contact-grid a {text-decoration: none; color: inherit;}
 .contact-card {text-align:center;padding:1.5rem;}
-.contact-card i {font-size:2rem;margin-bottom:0.5rem;color:var(--primary);}
-.contact-card h3 {margin:0.3rem 0;}
+.contact-card i {font-size:2rem;margin-bottom:0.5rem;color:var(--primary);transition: transform 0.3s ease;}
+.contact-card:hover i {transform: scale(1.1);}
+.contact-card h3 {margin:0.3rem 0;color: var(--text);}
 .contact-card p {color:var(--muted);font-size:0.9rem;}
 
 /* Footer */
-footer {text-align:center;padding:2rem;color:var(--muted);border-top:1px solid rgba(0,0,0,0.1);margin-top:3rem;font-size:0.85rem;}
+footer {
+  text-align:center;
+  padding:2rem;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  margin-top:3rem;
+  font-size:0.85rem;
+}
 
 /* Responsive */
 @media(max-width:768px){
@@ -128,16 +288,46 @@ footer {text-align:center;padding:2rem;color:var(--muted);border-top:1px solid r
   header p {font-size:1rem;}
   section {padding:3rem 1.2rem;}
   .project img {height:160px;}
+  .theme-toggle {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.4rem;
+  }
+  .theme-toggle-btn {
+    width: 55px;
+    height: 28px;
+  }
+  .theme-toggle-slider {
+    width: 22px;
+    height: 22px;
+  }
+  [data-theme="dark"] .theme-toggle-slider {
+    transform: translateX(27px);
+  }
 }
+
 @media(max-width:480px){
   header h1 {font-size:2rem;}
   header p {font-size:0.95rem;}
   .toolbox-item {flex:0 1 80px;}
   .project img {height:140px;}
+  .theme-toggle {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
 }
 </style>
 </head>
 <body>
+
+<div class="theme-toggle" onclick="toggleTheme()">
+  <div class="theme-toggle-btn">
+    <div class="theme-toggle-slider">
+      <i class="fas fa-sun"></i>
+    </div>
+  </div>
+</div>
+
 <header class="reveal">
   <h1>Mohammed Faahiz</h1>
   <p>Software Engineer • Tech Enthusiast</p>
@@ -146,18 +336,18 @@ footer {text-align:center;padding:2rem;color:var(--muted);border-top:1px solid r
 <section id="about" class="reveal">
   <h2>About Me</h2>
   <div class="card">
-    <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices. Passionate about clean code and dependable systems, I love exploring new tech and, when I’m not coding, you’ll likely find me gaming 🎮 or working on side projects.</p>
+    <p>Hi! 👋 I'm a software engineer with 3 years of experience building scalable backend solutions in .NET, SQL Server, and cloud-based microservices. Passionate about clean code and dependable systems, I love exploring new tech and, when I'm not coding, you'll likely find me gaming 🎮 or working on side projects.</p>
   </div>
 </section>
 
 <section id="toolbox" class="reveal">
   <h2>Tech Toolbox</h2>
   <div class="toolbox-grid">
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg"><span>.NET Core</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"><span>SQL Server</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"><span>Azure</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"><span>Angular</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"><span>Git</span></div>
+    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core"><span>.NET Core</span></div>
+    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server"><span>SQL Server</span></div>
+    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"><span>Azure</span></div>
+    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"><span>Angular</span></div>
+    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
   </div>
 </section>
 
@@ -196,9 +386,21 @@ footer {text-align:center;padding:2rem;color:var(--muted);border-top:1px solid r
   <div class="resume-content">
     <div id="education" class="tab-content active card">
       <table>
-        <tr><th>Year</th><th>Degree</th><th>Institution</th></tr>
-        <tr><td>2018-2022</td><td>MCA</td><td>Visvesvaraya Technological University</td></tr>
-        <tr><td>2015-2018</td><td>BCA</td><td>Mangalore University</td></tr>
+        <tr>
+          <th>Year</th>
+          <th>Degree</th>
+          <th>Institution</th>
+        </tr>
+        <tr>
+          <td>2018-2022</td>
+          <td>MCA</td>
+          <td>Visvesvaraya Technological University</td>
+        </tr>
+        <tr>
+          <td>2015-2018</td>
+          <td>BCA</td>
+          <td>Mangalore University</td>
+        </tr>
       </table>
     </div>
     <div id="experience" class="tab-content card">
@@ -255,10 +457,36 @@ footer {text-align:center;padding:2rem;color:var(--muted);border-top:1px solid r
 </footer>
 
 <script>
+// Theme Toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  
+  const slider = document.querySelector('.theme-toggle-slider i');
+  slider.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+  
+  // Save preference
+  const preference = {};
+  preference.theme = newTheme;
+  // Store in memory only (no localStorage)
+  window.currentTheme = newTheme;
+}
+
+// Initialize theme
+window.addEventListener('load', () => {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.querySelector('.theme-toggle-slider i').className = 'fas fa-moon';
+  }
+});
+
+// Resume Tabs
 const tabs = document.querySelectorAll(".tab-btn");
 const contents = document.querySelectorAll(".tab-content");
 
-// Resume Tabs
 function tabsInit(){
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
