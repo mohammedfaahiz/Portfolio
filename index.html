@@ -167,17 +167,116 @@ section h2 {
 }
 
 /* Toolbox */
-.toolbox-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+.toolbox-container {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 3rem 0;
 }
 
-.toolbox-item {text-align:center;flex:0 1 100px;}
-.toolbox-item img {width: 50px;height: 50px;filter: grayscale(0);transition: filter 0.3s ease;}
-[data-theme="dark"] .toolbox-item img {filter: brightness(0.9);}
-.toolbox-item span {display:block;margin-top:0.5rem;font-size:0.9rem;color:var(--muted);}
+.toolbox-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.toolbox-item {
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s ease;
+  position: absolute;
+  display: none;
+}
+
+.toolbox-item.active {
+  opacity: 1;
+  transform: scale(1);
+  position: relative;
+  display: block;
+}
+
+.toolbox-item img {
+  width: 80px;
+  height: 80px;
+  filter: grayscale(0);
+  transition: filter 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .toolbox-item img {
+  filter: brightness(0.9);
+}
+
+.toolbox-item span {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 0.5rem;
+}
+
+.toolbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: var(--primary);
+  font-size: 1.2rem;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.toolbox-nav:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.toolbox-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.toolbox-nav.prev {
+  left: 0;
+}
+
+.toolbox-nav.next {
+  right: 0;
+}
+
+.toolbox-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.toolbox-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toolbox-dot.active {
+  background: var(--primary);
+  width: 30px;
+  border-radius: 5px;
+}
 
 /* Projects */
 .projects {
@@ -309,11 +408,22 @@ footer {
 @media(max-width:480px){
   header h1 {font-size:2rem;}
   header p {font-size:0.95rem;}
-  .toolbox-item {flex:0 1 80px;}
   .project img {height:140px;}
   .theme-toggle {
     top: 0.8rem;
     right: 0.8rem;
+  }
+  .toolbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  .toolbox-item img {
+    width: 60px;
+    height: 60px;
+  }
+  .toolbox-item span {
+    font-size: 1rem;
   }
 }
 </style>
@@ -342,12 +452,75 @@ footer {
 
 <section id="toolbox" class="reveal">
   <h2>Tech Toolbox</h2>
-  <div class="toolbox-grid">
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core"><span>.NET Core</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server"><span>SQL Server</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"><span>Azure</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"><span>Angular</span></div>
-    <div class="toolbox-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+  <div class="toolbox-container">
+    <div class="toolbox-slider">
+      <button class="toolbox-nav prev" onclick="changeToolbox(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <div class="toolbox-item active" data-index="0">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular">
+        <span>Angular</span>
+      </div>
+      <div class="toolbox-item" data-index="1">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
+        <span>Azure</span>
+      </div>
+      <div class="toolbox-item" data-index="2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+        <span>Docker</span>
+      </div>
+      <div class="toolbox-item" data-index="3">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core">
+        <span>.NET Core</span>
+      </div>
+      <div class="toolbox-item" data-index="4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+        <span>Git</span>
+      </div>
+      <div class="toolbox-item" data-index="5">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+        <span>MySQL</span>
+      </div>
+      <div class="toolbox-item" data-index="6">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+        <span>PostgreSQL</span>
+      </div>
+      <div class="toolbox-item" data-index="7">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <span>Python</span>
+      </div>
+      <div class="toolbox-item" data-index="8">
+        <img src="https://www.svgrepo.com/show/303576/rabbitmq-logo.svg" alt="RabbitMQ">
+        <span>RabbitMQ</span>
+      </div>
+      <div class="toolbox-item" data-index="9">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+        <span>Redis</span>
+      </div>
+      <div class="toolbox-item" data-index="10">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server">
+        <span>SQL Server</span>
+      </div>
+      
+      <button class="toolbox-nav next" onclick="changeToolbox(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    
+    <div class="toolbox-dots">
+      <span class="toolbox-dot active" onclick="goToToolbox(0)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(1)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(2)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(3)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(4)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(5)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(6)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(7)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(8)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(9)"></span>
+      <span class="toolbox-dot" onclick="goToToolbox(10)"></span>
+    </div>
   </div>
 </section>
 
@@ -457,6 +630,49 @@ footer {
 </footer>
 
 <script>
+// Toolbox Slider
+let currentToolbox = 0;
+const toolboxItems = document.querySelectorAll('.toolbox-item');
+const toolboxDots = document.querySelectorAll('.toolbox-dot');
+const totalToolbox = toolboxItems.length;
+
+function showToolbox(index) {
+  toolboxItems.forEach(item => item.classList.remove('active'));
+  toolboxDots.forEach(dot => dot.classList.remove('active'));
+  
+  if (index >= totalToolbox) {
+    currentToolbox = 0;
+  } else if (index < 0) {
+    currentToolbox = totalToolbox - 1;
+  } else {
+    currentToolbox = index;
+  }
+  
+  toolboxItems[currentToolbox].classList.add('active');
+  toolboxDots[currentToolbox].classList.add('active');
+}
+
+function changeToolbox(direction) {
+  showToolbox(currentToolbox + direction);
+}
+
+function goToToolbox(index) {
+  showToolbox(index);
+}
+
+// Auto-advance toolbox every 3 seconds
+let toolboxInterval = setInterval(() => {
+  changeToolbox(1);
+}, 3000);
+
+// Pause auto-advance when user interacts
+document.querySelector('.toolbox-container').addEventListener('click', () => {
+  clearInterval(toolboxInterval);
+  toolboxInterval = setInterval(() => {
+    changeToolbox(1);
+  }, 3000);
+});
+
 // Theme Toggle
 function toggleTheme() {
   const html = document.documentElement;
