@@ -1,1371 +1,1070 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Mohammed Faahiz - Software Engineer specializing in .NET Core, SQL Server, and cloud-based solutions. 3+ years of experience in building scalable backend systems.">
-<meta property="og:title" content="Mohammed Faahiz | Software Engineer Portfolio">
-<meta property="og:description" content="Full-stack developer with expertise in .NET Core, Azure, and microservices architecture">
-<meta property="og:type" content="website">
-<title>Mohammed Faahiz | Software Engineer</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-:root {
-  --bg: #f5f7fa;
-  --card-bg: #ffffff;
-  --primary: #2563eb;
-  --secondary: #06b6d4;
-  --accent: #f59e0b;
-  --success: #10b981;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --radius: 1rem;
-  --header-gradient: linear-gradient(135deg, #2563eb, #06b6d4);
-  --border: #e5e7eb;
-}
-
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --card-bg: #1e293b;
-  --primary: #60a5fa;
-  --secondary: #22d3ee;
-  --accent: #fbbf24;
-  --success: #34d399;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
-  --header-gradient: linear-gradient(135deg, #1e3a8a, #0e7490);
-  --border: #334155;
-}
-
-* {margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 1000;
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 50px;
-  padding: 0.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.theme-toggle:active {
-  transform: scale(0.95);
-}
-
-.theme-toggle-btn {
-  width: 60px;
-  height: 30px;
-  background: var(--primary);
-  border-radius: 50px;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.theme-toggle-slider {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 24px;
-  height: 24px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-}
-
-[data-theme="dark"] .theme-toggle-slider {
-  transform: translateX(30px);
-}
-
-/* Skip Link for Accessibility */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  z-index: 100;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-
-/* Animations */
-.reveal {opacity:0; transform: translateY(30px); transition: all 0.8s ease;}
-.reveal.active {opacity:1; transform: translateY(0);}
-
-/* Header */
-header {
-  text-align: center;
-  padding: 6rem 2rem 4rem;
-  background: var(--header-gradient);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-header h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  position: relative;
-  z-index: 1;
-}
-
-header p {
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-  opacity: 0.95;
-  position: relative;
-  z-index: 1;
-}
-
-.header-cta {
-  margin-top: 2rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 1;
-}
-
-.cta-btn {
-  padding: 0.8rem 2rem;
-  background: white;
-  color: var(--primary);
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-
-.cta-btn.secondary {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-/* Sections */
-section {
-  padding: 4rem 2rem;
-  max-width: 1100px;
-  margin: auto;
-}
-
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: var(--primary);
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background: var(--secondary);
-  border-radius: 2px;
-}
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  border: 1px solid var(--border);
-}
-
-[data-theme="dark"] .card {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-[data-theme="dark"] .card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-/* About Section */
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-
-.about-photo {
-  text-align: center;
-   margin-bottom: 1.5rem;
-}
-
-.about-photo img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--primary);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-@media(min-width:768px){
-  .about-content {
-    grid-template-columns: auto 1fr;
-    align-items: start;
-  }
-  .about-photo {
-    margin-bottom: 0;
-  }
-  .about-photo img {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-.about-text h3 {
-  color: var(--primary);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--success);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-top: 1rem;
-}
-
-.status-badge i {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.highlight-item {
-  padding: 1rem;
-  background: var(--bg);
-  border-radius: 0.5rem;
-  border-left: 4px solid var(--primary);
-}
-
-.highlight-item i {
-  color: var(--primary);
-  margin-right: 0.5rem;
-}
-
-.highlight-item strong {
-  display: block;
-  color: var(--text);
-  margin-top: 0.25rem;
-}
-
-/* Tech Toolbox - Grid View */
-.toolbox-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
-}
-
-.toolbox-item {
-  text-align: center;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0.8;
-}
-
-.toolbox-item:hover {
-  transform: translateY(-8px);
-  opacity: 1;
-}
-
-.toolbox-item img {
-  width: 70px;
-  height: 70px;
-  transition: filter 0.3s ease;
-  margin-bottom: 0.8rem;
-}
-
-[data-theme="dark"] .toolbox-item img {
-  filter: brightness(0.9);
-}
-
-.toolbox-item:hover img {
-  filter: drop-shadow(0 4px 8px var(--primary));
-}
-
-.toolbox-item span {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Projects */
-.projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-  gap: 2rem;
-}
-
-.projects a {text-decoration: none; color: inherit;}
-
-.project {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Project Image Fix */
-.project-image {
-  width: 100%;
-  aspect-ratio: 16/9; /* keeps consistent ratio for all images */
-  overflow: hidden;
-  border-radius: 0.8rem;
-  margin-bottom: 1rem;
-  background: var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* fills the container nicely */
-  border-radius: 0.8rem;
-  transition: transform 0.3s ease; /* optional smooth zoom on hover */
-}
-
-.project:hover .project-image img {
-  transform: scale(1.05); /* subtle zoom effect on hover */
-}
-  
-.project h3 {
-  margin: 0.5rem 0;
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.project h3 i {
-  font-size: 0.9rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project:hover h3 i {
-  opacity: 1;
-}
-
-.project-role {
-  font-size: 0.85rem;
-  color: var(--secondary);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.project p {
-  color: var(--text);
-  margin-bottom: 1rem;
-}
-
-.project-features {
-  list-style: none;
-  margin: 1rem 0;
-  padding: 0;
-}
-
-.project-features li {
-  padding: 0.3rem 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: start;
-  gap: 0.5rem;
-}
-
-.project-features li::before {
-  content: '✓';
-  color: var(--success);
-  font-weight: bold;
-  flex-shrink: 0;
-}
-
-.project-metrics {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
-}
-
-.project-metrics span {
-  font-size: 0.85rem;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.project-metrics i {
-  color: var(--primary);
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.tag {
-  background: var(--primary);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 500;
-}
-
-/* Resume */
-.resume-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.tab-btn {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  padding: 0.8rem 1.5rem;
-  border-radius: 50px;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.tab-btn.active, .tab-btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.tab-content {display:none;}
-.tab-content.active {display:block;}
-
-/* Education Table */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table tr {
-  border-bottom: 1px solid var(--border);
-}
-
-table tr:first-child {
-  border-bottom: 2px solid var(--primary);
-}
-
-table th {
-  text-align: left;
-  padding: 1rem 0.8rem;
-  font-weight: 700;
-  color: var(--text);
-  background: var(--bg);
-}
-
-table td {
-  padding: 1rem 0.8rem;
-  color: var(--text);
-}
-
-/* Experience */
-.experience-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.experience-list li {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.experience-list li:last-child {
-  border-bottom: none;
-}
-
-.experience-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.experience-list .date {
-  font-size: 0.9rem;
-  color: var(--secondary);
-  font-weight: 600;
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  background: var(--bg);
-  border-radius: 50px;
-}
-
-.experience-list h3 {
-  margin: 0.5rem 0;
-  color: var(--text);
-  font-size: 1.2rem;
-}
-
-.experience-list .company {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.experience-list > li > p {
-  color: var(--muted);
-  margin: 0.5rem 0 1rem 0;
-}
-
-.achievements {
-  list-style: none;
-  padding: 0;
-  margin-top: 1rem;
-}
-
-.achievements li {
-  padding: 0.5rem 0;
-  color: var(--text);
-  display: flex;
-  align-items: start;
-  gap: 0.8rem;
-  border: none;
-  margin: 0;
-}
-
-.achievements li::before {
-  content: '▸';
-  color: var(--primary);
-  font-weight: bold;
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
-
-/* Skills */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.skill-category h4 {
-  color: var(--primary);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.skill-category h4 i {
-  font-size: 1.2rem;
-}
-
-.skill-item {
-  margin-bottom: 1rem;
-}
-
-.skill-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.skill-name {
-  font-weight: 600;
-  color: var(--text);
-}
-
-.skill-level {
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
-.skill-bar {
-  height: 8px;
-  background: var(--border);
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.skill-progress {
-  height: 100%;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  border-radius: 50px;
-  transition: width 1s ease;
-}
-
-/* Contact */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
-
-.contact-grid a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.contact-card {
-  text-align: center;
-  padding: 2rem 1.5rem;
-  position: relative;
-}
-
-.contact-card i {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-  transition: transform 0.3s ease;
-}
-
-.contact-card:hover i {
-  transform: scale(1.15) rotate(5deg);
-}
-
-.contact-card h3 {
-  margin: 0.5rem 0;
-  color: var(--text);
-}
-
-.contact-card p {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  margin-top: 3rem;
-  font-size: 0.9rem;
-}
-
-footer p {
-  margin: 0.5rem 0;
-}
-
-/* Responsive */
-@media(max-width:768px){
-  header h1 {font-size: 2.5rem;}
-  header p {font-size: 1rem;}
-  section {padding: 3rem 1.5rem;}
-  section h2 {font-size: 1.8rem;}
-  .toolbox-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1.5rem;
-  }
-  .toolbox-item img {
-    width: 60px;
-    height: 60px;
-  }
-  .projects {
-    grid-template-columns: 1fr;
-  }
-  .theme-toggle {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.4rem;
-  }
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  .header-cta {
-    flex-direction: column;
-  }
-  .cta-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-@media(max-width:480px){
-  header h1 {font-size: 2rem;}
-  header p {font-size: 0.95rem;}
-  .theme-toggle {
-    top: 0.8rem;
-    right: 0.8rem;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mohammed Faahiz - Software Engineer specializing in .NET Core, SQL Server, and cloud-based solutions. 3+ years of experience in building scalable backend systems.">
+    <title>Mohammed Faahiz - Software Engineer 🚀</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #512bd4;
+            --secondary: #00d9ff;
+            --dark: #0a0a0a;
+            --light: #f0f0f0;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(81, 43, 212, 0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            background: rgba(81, 43, 212, 0.2);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(81, 43, 212, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 0 30px rgba(81, 43, 212, 0.8);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--secondary);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.6);
+            margin-bottom: 30px;
+            animation: float 6s ease-in-out infinite;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .glitch {
+            font-size: 5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 5s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        .tagline {
+            font-size: 1.8em;
+            margin: 20px 0 40px;
+            color: var(--secondary);
+            animation: neon 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon {
+            from { text-shadow: 0 0 10px var(--secondary), 0 0 20px var(--secondary); }
+            to { text-shadow: 0 0 20px var(--secondary), 0 0 30px var(--secondary), 0 0 40px var(--secondary); }
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--success);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 20px 0;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .status-badge i {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #8b5cf6);
+            color: white;
+            box-shadow: 0 0 20px rgba(81, 43, 212, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(81, 43, 212, 0.8);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(20px); }
+        }
+
+        /* Terminal About Section */
+        .terminal {
+            background: #1e1e1e;
+            border-radius: 15px;
+            margin: 100px auto;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--primary);
+        }
+
+        .terminal-header {
+            background: #323232;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.red { background: #ff5f56; }
+        .terminal-btn.yellow { background: #ffbd2e; }
+        .terminal-btn.green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .terminal-line {
+            opacity: 0;
+            animation: typeIn 0.5s forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.2s; }
+        .terminal-line:nth-child(2) { animation-delay: 0.4s; }
+        .terminal-line:nth-child(3) { animation-delay: 0.6s; }
+        .terminal-line:nth-child(4) { animation-delay: 0.8s; }
+        .terminal-line:nth-child(5) { animation-delay: 1s; }
+
+        @keyframes typeIn {
+            to { opacity: 1; }
+        }
+
+        .terminal-prompt { color: var(--secondary); }
+        .terminal-output { color: #4ec9b0; }
+
+        /* Section Title */
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin: 80px 0 60px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(81, 43, 212, 0.15), rgba(0, 217, 255, 0.1));
+            border: 1px solid rgba(81, 43, 212, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(81, 43, 212, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(81, 43, 212, 0.4);
+            border-color: var(--primary);
+        }
+
+        .achievement-card:hover::before {
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .achievement-card i {
+            font-size: 3em;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .achievement-card strong {
+            display: block;
+            color: var(--light);
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .achievement-card p {
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        /* Tech Toolbox */
+        .toolbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .toolbox-item {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .toolbox-item:hover {
+            transform: translateY(-15px) scale(1.1);
+        }
+
+        .toolbox-item img {
+            width: 80px;
+            height: 80px;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0, 217, 255, 0.3));
+        }
+
+        .toolbox-item:hover img {
+            filter: drop-shadow(0 8px 16px rgba(0, 217, 255, 0.6));
+        }
+
+        .toolbox-item span {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(81, 43, 212, 0.15), rgba(0, 217, 255, 0.1));
+            border: 1px solid rgba(81, 43, 212, 0.3);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-body {
+            padding: 30px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(81, 43, 212, 0.5);
+            border-color: var(--secondary);
+        }
+
+        .project-role {
+            color: var(--secondary);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            color: var(--light);
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-title i {
+            font-size: 0.8em;
+            color: var(--secondary);
+        }
+
+        .project-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .project-features li {
+            padding: 8px 0;
+            color: var(--light);
+            opacity: 0.9;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .project-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .project-metrics span {
+            font-size: 0.85em;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(81, 43, 212, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+            margin-bottom: 100px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 50px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 0;
+            text-align: right;
+            padding-right: 50px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            text-align: left;
+            padding-left: 50px;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: linear-gradient(135deg, rgba(81, 43, 212, 0.2), rgba(0, 217, 255, 0.1));
+            border: 1px solid rgba(81, 43, 212, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(81, 43, 212, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--secondary);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content h3 {
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content .company {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .achievements {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .achievements li {
+            padding: 8px 0;
+            color: var(--light);
+            opacity: 0.9;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .achievements li::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(81, 43, 212, 0.15), rgba(0, 217, 255, 0.1));
+            border: 1px solid rgba(81, 43, 212, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(81, 43, 212, 0.4);
+            border-color: var(--secondary);
+        }
+
+        .contact-card i {
+            font-size: 3em;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .contact-card h3 {
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        .contact-card p {
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(81, 43, 212, 0.3);
+            margin-top: 100px;
+        }
+
+        footer p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 3em; }
+            .tagline { font-size: 1.2em; }
+            .section-title { font-size: 2em; }
+            .timeline::before { left: 20px; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+                text-align: left;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .timeline-dot { left: 20px; }
+            .container { padding: 0 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-
-<a href="#about" class="skip-link">Skip to content</a>
-
-<div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode" tabindex="0">
-  <div class="theme-toggle-btn">
-    <div class="theme-toggle-slider">
-      <i class="fas fa-sun"></i>
-    </div>
-  </div>
-</div>
-
-<header class="reveal">
-  <h1>Mohammed Faahiz</h1>
-  <p>Software Engineer • Backend Specialist • Cloud Enthusiast</p>
-  <div class="header-cta">
-    <a href="#projects" class="cta-btn">
-      <i class="fas fa-code"></i> View My Work
-    </a>
-    <a href="#contact" class="cta-btn secondary">
-      <i class="fas fa-envelope"></i> Get in Touch
-    </a>
-  </div>
-</header>
-
-<section id=bout" class="reveal">
-  <h2>About Me</h2>"a
-  <div class="card">
-    <div class="about-content">
- 
-      <div class="about-photo">
-        <img src="img/mypic.png" alt="OneBill Platform Screenshot">
-      </div>
-      
-      <div class="about-text">
-      <p>
-        Software Engineer with 3+ years of experience designing and building scalable backend systems and full-stack applications.
-        Specialized in .NET Core, SQL Server, and cloud-based solutions with production exposure.
-      </p>
-        
-        <div class="status-badge">
-          <i class="fas fa-circle"></i>
-          Open to Opportunities
-        </div>
-        
-        <h3>What I Do Best</h3>
-        <div class="highlights">
-          <div class="highlight-item">
-            <i class="fas fa-cloud"></i>
-            <strong>Cloud Integration</strong>
-            Integrated smart meter systems to cloud platforms
-          </div>
-          <div class="highlight-item">
-            <i class="fab fa-docker"></i>
-            <strong>DevOps</strong>
-            Dockerized .NET applications for scalable deployments
-          </div>
-          <div class="highlight-item">
-            <i class="fas fa-credit-card"></i>
-            <strong>Payment Systems</strong>
-            Implemented secure payment gateway integrations
-          </div>
-          <div class="highlight-item">
-            <i class="fas fa-envelope"></i>
-            <strong>Communication</strong>
-            Deployed Azure Communication Services for reliable email delivery
-          </div>
-        </div>
-        
-        <h3>Currently Exploring</h3>
-        <p>Building Windows Services and background processing systems using .NET.</p>
-
-        
-        <p style="margin-top: 1rem;">When I'm not coding, you'll find me gaming 🎮, exploring new technologies, or working on side projects that push my skills further.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="achievements" class="reveal">
-  <h2>Key Achievements</h2>
-  <div class="card highlights">
+    <div class="bg-animation"></div>
     
-    <div class="highlight-item">
-      <i class="fas fa-bolt"></i>
-      <strong>Performance Optimization</strong>
-      Improved API response times by optimizing SQL queries and indexing
+    <!-- Floating Particles -->
+    <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 20%; left: 80%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 60%; left: 20%; animation-delay: 4s;"></div>
+    <div class="particle" style="top: 80%; left: 70%; animation-delay: 6s;"></div>
+    <div class="particle" style="top: 40%; left: 90%; animation-delay: 3s;"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+        <i class="fas fa-moon"></i>
     </div>
 
-    <div class="highlight-item">
-      <i class="fas fa-cloud"></i>
-      <strong>Cloud Migration</strong>
-      Migrated legacy services to Azure App Services and Docker containers
-    </div>
-
-    <div class="highlight-item">
-      <i class="fas fa-users"></i>
-      <strong>Production Scale</strong>
-      Built and maintained systems serving 250–500+ active users
-    </div>
-
-    <div class="highlight-item">
-      <i class="fas fa-shield-alt"></i>
-      <strong>Secure Payments</strong>
-      Implemented secure payment gateway integrations following best practices
-    </div>
-
-  </div>
-</section>
-<section id="toolbox" class="reveal">
-  <h2>Tech Toolbox</h2>
-  <div class="card">
-    <div class="toolbox-grid">
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core">
-        <span>.NET Core</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server">
-        <span>SQL Server</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
-        <span>PostgreSQL</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
-        <span>Azure</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
-        <span>Docker</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular">
-        <span>Angular</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-        <span>Python</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-        <span>Git</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
-        <span>Redis</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://www.svgrepo.com/show/303576/rabbitmq-logo.svg" alt="RabbitMQ">
-        <span>RabbitMQ</span>
-      </div>
-      <div class="toolbox-item">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-        <span>MySQL</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="reveal">
-  <h2>Featured Projects</h2>
-  <div class="projects">
-    <a href="https://www.mybill.ae" target="_blank" rel="noopener noreferrer" class="card project">
-      <div class="project-image">
-         <img src="img/oneBill.png" alt="OneBill Platform Screenshot">
-      </div>
-      <span class="project-role">Full-Stack Developer</span>
-      <h3>OneBill <i class="fas fa-external-link-alt"></i></h3>
-      <p>Comprehensive utilities platform for smart meter tracking and management with integrated payment solutions.</p>
-      <ul class="project-features">
-        <li>Implemented secure online payment gateway integration</li>
-        <li>Replaced SMTP with Azure Communication Services</li>
-        <li>Built real-time smart meter data visualization</li>
-        <li>Developed RESTful APIs for mobile app integration</li>
-      </ul>
-      <div class="project-metrics">
-        <span><i class="fas fa-users"></i> 250-500 Users</span>
-        <span><i class="fas fa-check-circle"></i> Production</span>
-      </div>
-      <div class="project-tags">
-        <span class="tag">Angular</span>
-        <span class="tag">.NET Core</span>
-        <span class="tag">Azure</span>
-        <span class="tag">SQL Server</span>
-      </div>
-    </a>
-
-    <a href="https://www.ensmart.ae" target="_blank" rel="noopener noreferrer" class="card project">
-      <div class="project-image">
-         <img src="img/Ensmart.png" alt="OneBill Platform Screenshot">
-      </div>
-      <span class="project-role">Full-Stack Developer</span>
-      <h3>EMASS - Ensmart <i class="fas fa-external-link-alt"></i></h3>
-      <p>Energy monitoring platform providing detailed analytics and insights from smart meter data.</p>
-      <ul class="project-features">
-        <li>Developed data analytics dashboard</li>
-        <li>Implemented real-time monitoring features</li>
-        <li>Built reporting system with PDF generation</li>
-        <li>Optimized database queries for large datasets</li>
-      </ul>
-      <div class="project-metrics">
-        <span><i class="fas fa-chart-line"></i> Analytics Platform</span>
-        <span><i class="fas fa-check-circle"></i> Production</span>
-      </div>
-      <div class="project-tags">
-        <span class="tag">ASP.NET MVC</span>
-        <span class="tag">SQL Server</span>
-        <span class="tag">JavaScript</span>
-      </div>
-    </a>
-
-    <a href="https://www.smartbill.ae" target="_blank" rel="noopener noreferrer" class="card project">
-      <div class="project-image">
-         <img src="img/smartbill.png" alt="OneBill Platform Screenshot">
-      </div>
-      <span class="project-role">Full-Stack Developer</span>
-      <h3>Smart Bill <i class="fas fa-external-link-alt"></i></h3>
-      <p>Windows-based monitoring and billing solution for utility management.</p>
-      <ul class="project-features">
-        <li>Built desktop application for offline billing</li>
-        <li>Developed automated billing calculation engine</li>
-        <li>Created data synchronization system</li>
-        <li>Implemented invoice generation module</li>
-      </ul>
-      <div class="project-metrics">
-        <span><i class="fas fa-desktop"></i> Desktop App</span>
-        <span><i class="fas fa-check-circle"></i> Production</span>
-      </div>
-      <div class="project-tags">
-        <span class="tag">.NET Framework</span>
-        <span class="tag">SQL Server</span>
-        <span class="tag">WinForms</span>
-      </div>
-    </a>
-  </div>
-</section>
-<section id="architecture" class="reveal">
-  <h2>System Design & Architecture</h2>
-  <div class="card">
-  <ul class="achievements">
-    <li>Designed and developed scalable backend services using .NET Core and ASP.NET MVC</li>
-    <li>Built and maintained RESTful APIs consumed by web and mobile applications</li>
-    <li>Integrated secure online payment gateways with proper validation and error handling</li>
-    <li>Implemented Azure Communication Services for reliable transactional email delivery</li>
-    <li>Containerized applications using Docker to streamline deployments across environments</li>
-    <li>Optimized SQL Server queries, indexes, and stored procedures to improve performance</li>
-    <li>Worked on cloud-based smart meter platforms handling real-time data ingestion</li>
-    <li>Collaborated with cross-functional teams in Agile development cycles</li>
-  </ul>
-  </div>
-</section>
-<section id="resume" class="reveal">
-  <h2>Resume</h2>
-  <div class="resume-tabs">
-    <button class="tab-btn active" data-tab="experience">Experience</button>
-    <button class="tab-btn" data-tab="skills">Skills</button>
-    <button class="tab-btn" data-tab="education">Education</button>
-  </div>
-  <div class="resume-content">
-    <div id="experience" class="tab-content active card">
-      <ul class="experience-list">
-        <li>
-          <div class="experience-header">
-            <div>
-              <h3>Career Break – Skill Development</h3>
-              <p class="company">Self-Directed Learning</p>
+    <!-- Hero Section -->
+    <header>
+        <div class="hero-content">
+            <img src="img/mypic.png" alt="Mohammed Faahiz" class="profile-image">
+            <h1 class="glitch">Mohammed Faahiz</h1>
+            <p class="tagline">// Software Engineer • Backend Specialist • Cloud Enthusiast</p>
+            <div class="status-badge">
+                <i class="fas fa-circle"></i>
+                Open to Opportunities
             </div>
-            <span class="date">2020 - 2022</span>
-          </div>
-          <p>
-            Career gap due to COVID-19 pandemic, focused on strengthening technical skills,
-            practical learning, and industry readiness.
-          </p>
-          <ul class="achievements">
-            <li>Deepened knowledge of .NET Core, ASP.NET MVC, and backend architecture</li>
-            <li>Worked on personal and practice projects to improve full-stack development skills</li>
-            <li>Learned SQL Server optimization, REST API design, and clean code principles</li>
-            <li>Explored cloud fundamentals, Docker basics, and modern development workflows</li>
-            <li>Prepared for professional software engineering roles through continuous self-learning</li>
-          </ul>
-        </li>
-        <li>
-          <div class="experience-header">
-            <div>
-              <h3>Software Engineer</h3>
-              <p class="company">Raasoft Infotech Pvt Ltd</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-code"></i> View My Work
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Let's Talk
+                </a>
             </div>
-            <span class="date">2022 - Present</span>
-          </div>
-          <p>Developing scalable backend solutions and full-stack applications for smart meter platforms and utility management systems.</p>
-          <ul class="achievements">
-            <li>Contributed to cloud integration of smart meter systems, enabling real-time data collection and monitoring</li>
-            <li>Dockerized .NET applications, improving deployment efficiency and scalability across environments</li>
-            <li>Implemented payment gateway integration for OneBill platform, processing secure online transactions</li>
-            <li>Deployed Azure Communication Services to replace SMTP, significantly improving email delivery reliability</li>
-            <li>Developed RESTful APIs serving 250-500+ users across multiple utility management platforms</li>
-            <li>Optimized SQL Server database queries and indexes, enhancing application performance</li>
-            <li>Collaborated with cross-functional teams to deliver features on time in an Agile environment</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    
-    <div id="skills" class="tab-content card">
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h4><i class="fas fa-server"></i> Backend Development</h4>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">.NET Core (3.1, 7, 8)</span>
-              <span class="skill-level">Advanced</span>
+        </div>
+        <div class="scroll-indicator">
+            <div style="font-size: 2em; color: var(--secondary);">↓</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Terminal About Section -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-btn red"></div>
+                <div class="terminal-btn yellow"></div>
+                <div class="terminal-btn green"></div>
             </div>
-          
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">ASP.NET MVC</span>
-              <span class="skill-level">Advanced</span>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">faahiz@portfolio:~$</span> cat about.txt
+                </div>
+                <div class="terminal-line terminal-output">
+                    > Software Engineer with 3+ years designing scalable backend systems
+                </div>
+                <div class="terminal-line terminal-output">
+                    > Specialized in .NET Core, SQL Server, and cloud-based solutions
+                </div>
+                <div class="terminal-line terminal-output">
+                    > Production exposure serving 250-500+ users across utility platforms
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-prompt">faahiz@portfolio:~$</span> <span style="animation: blink 1s infinite;">_</span>
+                </div>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">REST APIs</span>
-              <span class="skill-level">Advanced</span>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Python</span>
-              <span class="skill-level">Intermidiate</span>
-            </div>
-          </div>
         </div>
 
-        <div class="skill-category">
-          <h4><i class="fas fa-database"></i> Databases</h4>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">SQL Server</span>
-              <span class="skill-level">Advanced</span>
+        <!-- Achievements -->
+        <h2 class="section-title">Key Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <i class="fas fa-bolt"></i>
+                <strong>Performance Optimization</strong>
+                <p>Improved API response times by optimizing SQL queries and indexing</p>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">PostgreSQL</span>
-              <span class="skill-level">Advanced</span>
+            <div class="achievement-card">
+                <i class="fas fa-cloud"></i>
+                <strong>Cloud Migration</strong>
+                <p>Migrated legacy services to Azure App Services and Docker containers</p>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">MySQL</span>
-              <span class="skill-level">Intermediate</span>
+            <div class="achievement-card">
+                <i class="fas fa-users"></i>
+                <strong>Production Scale</strong>
+                <p>Built systems serving 250–500+ active users</p>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Redis</span>
-              <span class="skill-level">Intermediate</span>
+            <div class="achievement-card">
+                <i class="fas fa-shield-alt"></i>
+                <strong>Secure Payments</strong>
+                <p>Implemented secure payment gateway integrations</p>
             </div>
-          </div>
         </div>
 
-        <div class="skill-category">
-          <h4><i class="fas fa-code"></i> Frontend Development</h4>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Angular</span>
-              <span class="skill-level">Advanced</span>
+        <!-- Tech Toolbox -->
+        <h2 class="section-title">Tech Arsenal</h2>
+        <div class="toolbox-grid">
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core">
+                <span>.NET Core</span>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">HTML/CSS/JavaScript</span>
-              <span class="skill-level">Advanced</span>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server">
+                <span>SQL Server</span>
             </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">React.js</span>
-              <span class="skill-level">Familiar</span>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                <span>PostgreSQL</span>
             </div>
-          </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
+                <span>Azure</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                <span>Docker</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular">
+                <span>Angular</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                <span>Python</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                <span>Git</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis">
+                <span>Redis</span>
+            </div>
+            <div class="toolbox-item">
+                <img src="https://www.svgrepo.com/show/303576/rabbitmq-logo.svg" alt="RabbitMQ">
+                <span>RabbitMQ</span>
+            </div>
         </div>
 
-        <div class="skill-category">
-          <h4><i class="fas fa-cloud"></i> Cloud & DevOps</h4>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Azure (App Service, Functions)</span>
-              <span class="skill-level">Advanced</span>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Docker</span>
-              <span class="skill-level">Advanced</span>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">Git & GitHub</span>
-              <span class="skill-level">Advanced</span>
-            </div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">RabbitMQ</span>
-              <span class="skill-level">Intermediate</span>
-            </div>
-          </div>
+        <!-- Projects -->
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <a href="https://www.mybill.ae" target="_blank" class="project-card">
+                <div class="project-image">
+                    <img src="img/oneBill.png" alt="OneBill Platform">
+                </div>
+                <div class="project-body">
+                    <div class="project-role">Full-Stack Developer</div>
+                    <h3 class="project-title">OneBill <i class="fas fa-external-link-alt"></i></h3>
+                    <p>Comprehensive utilities platform for smart meter tracking with integrated payment solutions.</p>
+                    <ul class="project-features">
+                        <li>Secure payment gateway integration</li>
+                        <li>Azure Communication Services deployment</li>
+                        <li>Real-time smart meter data visualization</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <span><i class="fas fa-users"></i> 250-500 Users</span>
+                        <span><i class="fas fa-check-circle"></i> Production</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">.NET Core</span>
+                        <span class="tech-tag">Azure</span>
+                        <span class="tech-tag">SQL Server</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.ensmart.ae" target="_blank" class="project-card">
+                <div class="project-image">
+                    <img src="img/Ensmart.png" alt="EMASS Platform">
+                </div>
+                <div class="project-body">
+                    <div class="project-role">Full-Stack Developer</div>
+                    <h3 class="project-title">EMASS - Ensmart <i class="fas fa-external-link-alt"></i></h3>
+                    <p>Energy monitoring platform with detailed analytics from smart meter data.</p>
+                    <ul class="project-features">
+                        <li>Data analytics dashboard</li>
+                        <li>Real-time monitoring features</li>
+                        <li>PDF report generation</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <span><i class="fas fa-chart-line"></i> Analytics Platform</span>
+                        <span><i class="fas fa-check-circle"></i> Production</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">ASP.NET MVC</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.smartbill.ae" target="_blank" class="project-card">
+                <div class="project-image">
+                    <img src="img/smartbill.png" alt="Smart Bill Platform">
+                </div>
+                <div class="project-body">
+                    <div class="project-role">Full-Stack Developer</div>
+                    <h3 class="project-title">Smart Bill <i class="fas fa-external-link-alt"></i></h3>
+                    <p>Windows-based monitoring and billing solution for utility management.</p>
+                    <ul class="project-features">
+                        <li>Desktop application for offline billing</li>
+                        <li>Automated billing calculation</li>
+                        <li>Invoice generation module</li>
+                    </ul>
+                    <div class="project-metrics">
+                        <span><i class="fas fa-desktop"></i> Desktop App</span>
+                        <span><i class="fas fa-check-circle"></i> Production</span>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">.NET Framework</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">WinForms</span>
+                    </div>
+                </div>
+            </a>
         </div>
-      </div>
+
+        <!-- Experience Timeline -->
+        <h2 class="section-title">Journey So Far</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2022 - Present</div>
+                    <h3>Software Engineer</h3>
+                    <p class="company">Raasoft Infotech Pvt Ltd</p>
+                    <ul class="achievements">
+                        <li>Cloud integration of smart meter systems</li>
+                        <li>Dockerized .NET applications for scalable deployments</li>
+                        <li>Payment gateway integration processing secure transactions</li>
+                        <li>Azure Communication Services deployment</li>
+                        <li>RESTful APIs serving 250-500+ users</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2020 - 2022</div>
+                    <h3>Career Break – Skill Development</h3>
+                    <p class="company">Self-Directed Learning</p>
+                    <ul class="achievements">
+                        <li>Deepened .NET Core & backend architecture knowledge</li>
+                        <li>Built practice projects for skill enhancement</li>
+                        <li>Learned SQL optimization & REST API design</li>
+                        <li>Explored Docker & cloud fundamentals</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-grid">
+            <a href="https://github.com/mohammedfaahiz" target="_blank" class="contact-card">
+                <i class="fab fa-github"></i>
+                <h3>GitHub</h3>
+                <p>@mohammedfaahiz</p>
+            </a>
+            <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" class="contact-card">
+                <i class="fab fa-linkedin"></i>
+                <h3>LinkedIn</h3>
+                <p>Mohammed Faahiz</p>
+            </a>
+            <a href="mailto:mohdfaahiz3565@gmail.com" class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>mohdfaahiz3565@gmail.com</p>
+            </a>
+            <a href="tel:+919900445476" class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+91 99004 45476</p>
+            </a>
+        </div>
     </div>
-    
-    <div id="education" class="tab-content card">
-      <table>
-        <tr>
-          <th>Year</th>
-          <th>Degree</th>
-          <th>Institution</th>
-        </tr>
-        <tr>
-          <td>2018-2020</td>
-          <td>Master of Computer Applications (MCA)</td>
-          <td>Visvesvaraya Technological University</td>
-        </tr>
-        <tr>
-          <td>2015-2018</td>
-          <td>Bachelor of Computer Applications (BCA)</td>
-          <td>Mangalore University</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</section>
 
-<section id="contact" class="reveal">
-  <h2>Get in Touch</h2>
-  <div class="contact-grid">
-    <a href="https://github.com/mohammedfaahiz" target="_blank" rel="noopener noreferrer" class="card contact-card">
-      <i class="fab fa-github"></i>
-      <h3>GitHub</h3>
-      <p>@mohammedfaahiz</p>
-    </a>
-    <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" rel="noopener noreferrer" class="card contact-card">
-      <i class="fab fa-linkedin"></i>
-      <h3>LinkedIn</h3>
-      <p>Mohammed Faahiz</p>
-    </a>
-    <a href="mailto:mohdfaahiz3565@gmail.com" class="card contact-card">
-      <i class="fas fa-envelope"></i>
-      <h3>Email</h3>
-      <p>mohdfaahiz3565@gmail.com</p>
-    </a>
-    <a href="tel:+919900445476" class="card contact-card">
-      <i class="fas fa-phone"></i>
-      <h3>Phone</h3>
-      <p>+91 99004 45476</p>
-    </a>
-  </div>
-</section>
+    <footer>
+        <p style="margin-bottom: 20px;">Built with 💜 using .NET and lots of coffee ☕</p>
+        <p>Actively seeking Backend / Full-Stack Software Engineer opportunities.</p>
+        <p>&copy; 2026 Mohammed Faahiz | All Rights Reserved</p>
+    </footer>
 
-<footer class="reveal">
-  <p>&copy; 2026 Mohammed Faahiz | All Rights Reserved</p>
-  <p>
-    Actively seeking Backend / Full-Stack Software Engineer opportunities.
-    Open to relocation and remote roles.
-  </p>
-</footer>
-  
-<script>
-// Theme Toggle
-function toggleTheme() {
-  const html = document.documentElement;
-  const currentTheme = html.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', newTheme);
-  
-  const slider = document.querySelector('.theme-toggle-slider i');
-  slider.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-  
-  window.currentTheme = newTheme;
-}
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle i');
+            
+            if (body.style.filter === 'invert(1) hue-rotate(180deg)') {
+                body.style.filter = '';
+                icon.className = 'fas fa-moon';
+            } else {
+                body.style.filter = 'invert(1) hue-rotate(180deg)';
+                icon.className = 'fas fa-sun';
+            }
+        }
 
-// Keyboard support for theme toggle
-document.querySelector('.theme-toggle').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    toggleTheme();
-  }
-});
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-// Initialize theme based on system preference
-window.addEventListener('load', () => {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (prefersDark) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.querySelector('.theme-toggle-slider i').className = 'fas fa-moon';
-  }
-  
-  // Animate skill bars on load
-  setTimeout(() => {
-    document.querySelectorAll('.skill-progress').forEach(bar => {
-      const width = bar.style.width;
-      bar.style.width = '0%';
-      setTimeout(() => {
-        bar.style.width = width;
-      }, 100);
-    });
-  }, 500);
-});
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelector('.bg-animation').style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
 
-// Resume Tabs
-const tabs = document.querySelectorAll(".tab-btn");
-const contents = document.querySelectorAll(".tab-content");
+        // Add more particles dynamically
+        for (let i = 0; i < 10; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            document.body.appendChild(particle);
+        }
+    </script>
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(btn => btn.classList.remove("active"));
-    tab.classList.add("active");
-    contents.forEach(c => c.classList.remove("active"));
-    document.getElementById(tab.dataset.tab).classList.add("active");
-    
-    // Re-animate skill bars when skills tab is opened
-    if (tab.dataset.tab === 'skills') {
-      document.querySelectorAll('.skill-progress').forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0%';
-        setTimeout(() => {
-          bar.style.width = width;
-        }, 100);
-      });
-    }
-  });
-});
-
-// Reveal on scroll
-function revealOnScroll() {
-  const reveals = document.querySelectorAll('.reveal');
-  const trigger = window.innerHeight * 0.85;
-
-  reveals.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if(rect.top < trigger) {
-      el.classList.add('active');
-    }
-  });
-}
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  });
-});
-
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
-
-// Add external link icons accessibility
-document.querySelectorAll('a[target="_blank"]').forEach(link => {
-  link.setAttribute('rel', 'noopener noreferrer');
-});
-</script>
+    <style>
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
 </body>
 </html>
