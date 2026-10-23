@@ -16,11 +16,21 @@ a{color:inherit}
 /* toolbar (screen only) */
 .toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
   max-width:850px;margin:0 auto;padding:14px 4vw;background:rgba(11,11,12,.94);backdrop-filter:blur(8px)}
-.toolbar a,.toolbar button{font:600 .88rem Inter,Arial,sans-serif;color:var(--gold);text-decoration:none;background:none;
-  border:1px solid var(--gold);border-radius:30px;padding:9px 20px;cursor:pointer;transition:.2s}
+.toolbar .actions{display:flex;gap:10px;flex-wrap:wrap}
+.toolbar a,.toolbar button{display:inline-flex;align-items:center;gap:8px;font:600 .88rem Inter,Arial,sans-serif;color:var(--gold);
+  text-decoration:none;background:none;border:1px solid var(--gold);border-radius:30px;padding:9px 20px;cursor:pointer;transition:.2s}
 .toolbar a:hover,.toolbar button:hover{background:var(--gold);color:#000}
 .toolbar button.pri{background:var(--gold);color:#000}
+.toolbar button.pri:hover{background:#f2d57a}
+.toolbar svg{width:16px;height:16px;fill:currentColor}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* tip shown while the save dialog is open */
+.tip{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:#18181b;color:#ececec;border:1px solid var(--gold);border-radius:12px;padding:12px 18px;
+  font:500 .88rem Inter,Arial,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.6);transition:.25s;z-index:20;max-width:90vw;text-align:center}
+.tip.show{opacity:1;transform:translate(-50%,0)}
+.tip b{color:var(--gold)}
 
 /* the sheet */
 .sheet{background:#fff;max-width:850px;margin:0 auto 60px;padding:56px 64px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -42,12 +52,13 @@ li{margin-bottom:3px}
 .skills p{margin-bottom:4px}
 
 @media(max-width:700px){.sheet{padding:32px 22px}h1{font-size:22pt}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* print / save as PDF: plain black-on-white document */
 @page{size:A4;margin:14mm 16mm}
 @media print{
   body{background:#fff}
-  .toolbar{display:none}
+  .toolbar,.tip{display:none!important}
   .sheet{box-shadow:none;margin:0;padding:0;max-width:none}
   .entry,li{break-inside:avoid}
   h2{break-after:avoid}
@@ -58,7 +69,20 @@ li{margin-bottom:3px}
 
 <div class="toolbar">
   <a href="index.html">← Back to portfolio</a>
-  <button class="pri" onclick="window.print()">Print / Save as PDF</button>
+  <div class="actions">
+    <button class="pri" id="savePdf" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16l-5-5 1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11l-5 5zm-7 2h14v2H5v-2z"/></svg>
+      Save as PDF
+    </button>
+    <button id="printBtn" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 8H5a3 3 0 00-3 3v6h4v4h12v-4h4v-6a3 3 0 00-3-3zm-3 11H8v-5h8v5zm3-7a1 1 0 110-2 1 1 0 010 2zM18 3H6v4h12V3z"/></svg>
+      Print
+    </button>
+  </div>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite">
+  In the dialog, set <b>Destination</b> to <b>Save as PDF</b>, then click <b>Save</b>.
 </div>
 
 <main class="sheet">
@@ -174,6 +198,35 @@ document.querySelectorAll('.mail-link').forEach(a=>{
   a.href='mailto:'+full;
   const t=a.querySelector('.mail-text'); if(t)t.textContent=full;
 });
+
+// Save as PDF / Print
+// Uses the browser's own PDF engine so the text stays real, selectable text (ATS-readable).
+const PAGE_TITLE=document.title;
+const PDF_NAME='Mohammed-Faahiz-Resume'; // browsers use the page title as the default PDF filename
+const tip=document.getElementById('tip');
+let tipTimer;
+
+function openDialog(showTip){
+  document.title=PDF_NAME;
+  if(showTip){
+    clearTimeout(tipTimer);
+    tip.classList.add('show');
+  }
+  // short delay lets the tip render before the dialog opens
+  setTimeout(()=>window.print(), showTip ? 350 : 0);
+}
+
+function reset(){
+  document.title=PAGE_TITLE;
+  tipTimer=setTimeout(()=>tip.classList.remove('show'),1500);
+}
+
+document.getElementById('savePdf').addEventListener('click',()=>openDialog(true));
+document.getElementById('printBtn').addEventListener('click',()=>openDialog(false));
+addEventListener('afterprint',reset);
+
+// Ctrl/Cmd+P also gets the clean filename
+addEventListener('beforeprint',()=>{document.title=PDF_NAME});
 </script>
 </body>
 </html>
