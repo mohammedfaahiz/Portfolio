@@ -10,9 +10,13 @@
 <meta property="og:title" content="Mohammed Faahiz — Senior Software Engineer">
 <meta property="og:description" content=".NET · REST APIs · SQL Server · IoT data processing. Billing platforms handling 1000+ smart meters.">
 <meta property="og:url" content="https://mohammedfaahiz.netlify.app/">
-<!-- Add a 1200x630 image and uncomment: <meta property="og:image" content="https://mohammedfaahiz.netlify.app/og.png"> -->
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0a'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23d4af37'>F</text></svg>">
+<meta property="og:image" content="https://mohammedfaahiz.netlify.app/MFlogo.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mohammedfaahiz.netlify.app/MFlogo.png">
+<link rel="icon" type="image/png" href="MFlogo.png">
+<link rel="apple-touch-icon" href="MFlogo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -35,7 +39,20 @@ section{padding:96px 0}
 nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:.3s}
 nav.scrolled{background:rgba(11,11,12,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;justify-content:space-between;align-items:center;height:68px}
-.logo{font-family:Fraunces,serif;font-weight:800;font-size:1.3rem}.logo span{color:var(--gold)}
+.logo{display:flex;align-items:center;gap:10px;font-family:Fraunces,serif;font-weight:800;font-size:1.3rem}
+.logo em{color:var(--gold);font-style:normal}
+
+/* MF monogram: crops the full logo image down to just the "MF" mark */
+.logo-mark{
+  display:inline-block;flex:none;
+  width:46px;height:46px;border-radius:10px;
+  background:#0a0a0a url('MFlogo.png') no-repeat;
+  background-size:92px 92px;
+  background-position:-24px -15px;
+  border:1px solid var(--line);
+}
+.logo-mark.sm{width:34px;height:34px;border-radius:8px;background-size:68px 68px;background-position:-17.5px -11px}
+
 .links{display:flex;gap:28px;list-style:none;align-items:center}
 .links a{font-size:.88rem;color:var(--dim);transition:.2s}.links a:hover{color:var(--gold)}
 .links .cta{border:1px solid var(--gold);color:var(--gold);padding:8px 18px;border-radius:30px;font-weight:600}
@@ -123,6 +140,7 @@ a.c-card:hover{border-color:var(--gold);transform:translateY(-3px)}
 
 footer{border-top:1px solid var(--line);padding:32px 0}
 .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--dim);font-size:.84rem}
+.foot-brand{display:flex;align-items:center;gap:12px}
 .socials{display:flex;gap:12px}
 .socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s}
 .socials a:hover{background:var(--gold);color:#000}
@@ -152,7 +170,10 @@ footer{border-top:1px solid var(--line);padding:32px 0}
 
 <nav id="nav">
   <div class="wrap nav-in">
-    <a href="#home" class="logo">Mohammed <span>Faahiz</span></a>
+    <a href="#home" class="logo" aria-label="Mohammed Faahiz — home">
+      <span class="logo-mark" role="img" aria-label="MF logo"></span>
+      <span>Mohammed <em>Faahiz</em></span>
+    </a>
     <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
     <ul class="links" id="links">
       <li><a href="#about">About</a></li>
@@ -313,10 +334,13 @@ footer{border-top:1px solid var(--line);padding:32px 0}
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 Mohammed Faahiz · Senior Software Engineer</span>
+    <div class="foot-brand">
+      <span class="logo-mark sm" role="img" aria-label="MF logo"></span>
+      <span>© 2026 Mohammed Faahiz · Senior Software Engineer</span>
+    </div>
     <div class="socials">
       <a href="https://github.com/mohammedfaahiz" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 015 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg></a>
-      <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.3 18.3V10H5.6v8.3h2.7zM7 8.8a1.6 1.6 0 100-3.1 1.6 1.6 0 000 3.1zm11.3 9.5v-4.5c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.300 1.3v-1.1H10.3v8.3H13v-4.6c0-1.2.9-1.5 1.4-1.5.6 0 1.3.4 1.3 1.5v4.6h2.6z"/></svg></a>
+      <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.3 18.3V10H5.6v8.3h2.7zM7 8.8a1.6 1.6 0 100-3.1 1.6 1.6 0 000 3.1zm11.3 9.5v-4.5c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.3 1.3v-1.1H10.3v8.3H13v-4.6c0-1.2.9-1.5 1.4-1.5.6 0 1.3.4 1.3 1.5v4.6h2.6z"/></svg></a>
       <a href="#" class="mail-link" data-u="mohdfaahiz3565" data-d="gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg></a>
     </div>
   </div>
