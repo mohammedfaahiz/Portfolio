@@ -26,6 +26,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+button{font-family:inherit}
 h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif}
 .mono{font-family:'JetBrains Mono',monospace}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
@@ -75,10 +76,13 @@ h1 span{color:var(--gold)}
 .sub{font-size:clamp(1.1rem,2.2vw,1.45rem);color:var(--gold2);margin:12px 0 18px;font-weight:500}
 .lead{color:var(--dim);max-width:560px;margin-bottom:32px}
 .btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn{padding:14px 28px;border-radius:30px;font-weight:600;font-size:.9rem;border:1px solid var(--gold);transition:.25s;display:inline-block}
+.btn{padding:14px 28px;border-radius:30px;font-weight:600;font-size:.9rem;border:1px solid var(--gold);transition:.25s;display:inline-block;cursor:pointer}
 .btn.pri{background:linear-gradient(135deg,var(--gold),#b8941f);color:#0b0b0c;box-shadow:0 8px 28px rgba(212,175,55,.3)}
 .btn.pri:hover{transform:translateY(-2px)}
-.btn.ghost{color:var(--gold)}.btn.ghost:hover{background:rgba(212,175,55,.1)}
+.btn.ghost{color:var(--gold);background:none}.btn.ghost:hover{background:rgba(212,175,55,.1)}
+.btn.wa{background:#25D366;border-color:#25D366;color:#06210f;display:inline-flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(37,211,102,.25)}
+.btn.wa:hover{transform:translateY(-2px)}
+.btn.wa svg{width:18px;height:18px;fill:currentColor}
 .metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .metric{background:var(--panel);padding:28px 22px}
 .metric b{display:block;font-family:Fraunces,serif;font-size:2.4rem;color:var(--gold);line-height:1.1}
@@ -134,9 +138,19 @@ a.proj:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 22
 .contact p{color:var(--dim);max-width:540px;margin:0 auto 34px}
 .contact .btns{justify-content:center}
 .c-cards{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:34px}
-.c-card{padding:16px 24px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-align:left;transition:.3s}
-a.c-card:hover{border-color:var(--gold);transform:translateY(-3px)}
-.c-card small{display:block;color:var(--dim);font-size:.72rem}.c-card b{font-size:.92rem}
+.c-card{padding:16px 24px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-align:left;transition:.3s;font-size:inherit;color:inherit}
+a.c-card:hover,button.c-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+button.c-card{cursor:pointer;font-family:inherit}
+.c-card small{display:block;color:var(--dim);font-size:.72rem}.c-card b{font-size:.92rem;font-weight:700}
+.c-card b a{color:var(--gold2)}
+
+/* scratch-to-reveal phone */
+.scratch-wrap{position:relative;display:inline-block;margin:2px 0;border-radius:6px;overflow:hidden;vertical-align:top}
+.scratch-wrap b{display:block;padding:2px 6px;font-variant-numeric:tabular-nums;min-width:150px;user-select:none}
+.scratch-wrap.done b{user-select:text}
+#scratch{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none;transition:opacity .45s}
+#scratch.gone{opacity:0;pointer-events:none}
+.c-card .hint{margin-top:2px;color:var(--gold);font-size:.7rem}
 
 footer{border-top:1px solid var(--line);padding:32px 0}
 .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--dim);font-size:.84rem}
@@ -145,6 +159,25 @@ footer{border-top:1px solid var(--line);padding:32px 0}
 .socials a{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s}
 .socials a:hover{background:var(--gold);color:#000}
 .socials svg{width:18px;height:18px;fill:currentColor}
+
+/* floating whatsapp */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:.3s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:30px;height:30px;fill:currentColor}
+
+/* whatsapp warning modal */
+.modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);opacity:0;transition:opacity .25s}
+.modal[hidden]{display:none}
+.modal.show{opacity:1}
+.modal-box{width:min(440px,100%);background:linear-gradient(160deg,var(--panel),var(--panel2));border:1px solid var(--gold);border-radius:18px;padding:30px 28px 26px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.7);transform:translateY(14px) scale(.97);transition:transform .25s}
+.modal.show .modal-box{transform:none}
+.modal-ico{width:58px;height:58px;margin:0 auto 16px;border-radius:50%;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;color:#25D366}
+.modal-ico svg{width:30px;height:30px;fill:currentColor}
+.modal-box h3{font-size:1.4rem;margin-bottom:10px}
+.modal-box p{color:var(--dim);font-size:.92rem;margin-bottom:12px}
+.warn{display:flex;gap:10px;text-align:left;font-size:.82rem;color:var(--gold2);background:rgba(212,175,55,.07);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:16px 0 22px}
+.modal-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.modal-btns .btn{padding:12px 24px}
 
 /* reveal only when JS is active */
 .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
@@ -167,6 +200,11 @@ footer{border-top:1px solid var(--line);padding:32px 0}
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
+
+<!-- WhatsApp icon (defined once, reused everywhere) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+</svg>
 
 <nav id="nav">
   <div class="wrap nav-in">
@@ -322,10 +360,25 @@ footer{border-top:1px solid var(--line);padding:32px 0}
     <p>I'm open to new roles, including those with visa sponsorship. Notice period is negotiable.</p>
     <div class="c-cards">
       <a class="c-card mail-link" href="#" data-u="mohdfaahiz3565" data-d="gmail.com"><small>Email</small><b class="mail-text"></b></a>
-      <a class="c-card" href="tel:+919900445476"><small>Phone</small><b>+91 99004 45476</b></a>
+
+      <!-- Phone: hidden behind a scratch layer -->
+      <div class="c-card" id="phoneCard">
+        <small>Phone</small>
+        <div class="scratch-wrap" id="scratchWrap">
+          <b id="phoneText">+•• ••••• •••••</b>
+          <canvas id="scratch" tabindex="0" role="button" aria-label="Scratch to reveal phone number. Press Enter or Space to reveal."></canvas>
+        </div>
+        <small class="hint" id="phoneHint">✦ Scratch to reveal</small>
+      </div>
+
+      <button type="button" class="c-card" data-wa><small>WhatsApp</small><b>Message me on WhatsApp</b></button>
       <div class="c-card"><small>Location</small><b>Mangalore, Karnataka, India</b></div>
     </div>
     <div class="btns">
+      <button type="button" class="btn wa" data-wa>
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>
+        Chat on WhatsApp
+      </button>
       <a class="btn pri mail-link" href="#" data-u="mohdfaahiz3565" data-d="gmail.com">Start a Conversation →</a>
       <a class="btn ghost" href="resume.html">View Résumé</a>
     </div>
@@ -339,6 +392,7 @@ footer{border-top:1px solid var(--line);padding:32px 0}
       <span>© 2026 Mohammed Faahiz · Senior Software Engineer</span>
     </div>
     <div class="socials">
+      <a href="#" data-wa aria-label="WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
       <a href="https://github.com/mohammedfaahiz" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 015 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg></a>
       <a href="https://linkedin.com/in/mohammedfaahiz" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8.3 18.3V10H5.6v8.3h2.7zM7 8.8a1.6 1.6 0 100-3.1 1.6 1.6 0 000 3.1zm11.3 9.5v-4.5c0-2.4-1.3-3.5-3-3.5-1.4 0-2 .8-2.3 1.3v-1.1H10.3v8.3H13v-4.6c0-1.2.9-1.5 1.4-1.5.6 0 1.3.4 1.3 1.5v4.6h2.6z"/></svg></a>
       <a href="#" class="mail-link" data-u="mohdfaahiz3565" data-d="gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg></a>
@@ -346,19 +400,175 @@ footer{border-top:1px solid var(--line);padding:32px 0}
   </div>
 </footer>
 
+<!-- Floating WhatsApp button -->
+<button type="button" class="wa-float" data-wa aria-label="Chat on WhatsApp" style="border:0;cursor:pointer">
+  <svg aria-hidden="true"><use href="#i-wa"/></svg>
+</button>
+
+<!-- WhatsApp warning modal -->
+<div class="modal" id="waModal" role="dialog" aria-modal="true" aria-labelledby="waTitle" aria-describedby="waDesc" hidden>
+  <div class="modal-box">
+    <div class="modal-ico"><svg aria-hidden="true"><use href="#i-wa"/></svg></div>
+    <h3 id="waTitle">Continue to chat on WhatsApp?</h3>
+    <p id="waDesc">You're about to leave this portfolio and open WhatsApp to message me directly.</p>
+    <div class="warn">
+      <span aria-hidden="true">⚠️</span>
+      <span>Please keep the conversation professional. Never share OTPs, passwords or banking details over chat.</span>
+    </div>
+    <div class="modal-btns">
+      <button type="button" class="btn ghost" id="waCancel">Cancel</button>
+      <button type="button" class="btn wa" id="waGo">
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>
+        Continue to WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
-// Email assembled in JS so host-level email obfuscation can't break the links
+// ---------- Contact details (assembled in JS, never written in the HTML) ----------
+const CC='91', P1='99004', P2='45476';
+const phoneIntl = () => CC+P1+P2;
+const phonePretty = () => '+'+CC+' '+P1+' '+P2;
+const WA_MSG = 'Hi Mohammed, I saw your portfolio and would like to connect.';
+
+// Email
 document.querySelectorAll('.mail-link').forEach(a=>{
   const full=a.dataset.u+'@'+a.dataset.d;
   a.href='mailto:'+full;
   const t=a.querySelector('.mail-text'); if(t)t.textContent=full;
 });
 
-// Navbar background on scroll
+// ---------- Scratch to reveal phone ----------
+(function(){
+  const cv=document.getElementById('scratch'),
+        wrap=document.getElementById('scratchWrap'),
+        ctx=cv.getContext('2d',{willReadFrequently:true}),
+        txt=document.getElementById('phoneText'),
+        hint=document.getElementById('phoneHint');
+  let revealed=false, drawing=false, last=null, w=0, h=0;
+
+  function paint(){
+    if(revealed) return;
+    const r=wrap.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    w=r.width; h=r.height;
+    cv.width=Math.round(w*d); cv.height=Math.round(h*d);
+    ctx.setTransform(d,0,0,d,0,0);
+    ctx.globalCompositeOperation='source-over';
+    const g=ctx.createLinearGradient(0,0,w,h);
+    g.addColorStop(0,'#b8941f'); g.addColorStop(.5,'#f2d57a'); g.addColorStop(1,'#d4af37');
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    // subtle sparkle lines
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1;
+    for(let x=-h;x<w;x+=9){ctx.beginPath();ctx.moveTo(x,h);ctx.lineTo(x+h,0);ctx.stroke();}
+    ctx.fillStyle='rgba(11,11,12,.8)';
+    ctx.font='600 11px "JetBrains Mono",monospace';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('SCRATCH HERE',w/2,h/2);
+  }
+
+  function pos(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+
+  function scratchAt(p){
+    ctx.globalCompositeOperation='destination-out';
+    ctx.lineWidth=26; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath();
+    if(last){ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();}
+    else{ctx.arc(p.x,p.y,13,0,Math.PI*2);ctx.fill();}
+    last=p;
+  }
+
+  function cleared(){
+    const data=ctx.getImageData(0,0,cv.width,cv.height).data;
+    let clear=0,total=0;
+    for(let i=3;i<data.length;i+=16){total++;if(data[i]===0)clear++;}
+    return clear/total;
+  }
+
+  function reveal(){
+    if(revealed) return;
+    revealed=true;
+    const a=document.createElement('a');
+    a.href='tel:+'+phoneIntl();
+    a.textContent=phonePretty();
+    txt.replaceChildren(a);
+    wrap.classList.add('done');
+    cv.classList.add('gone');
+    cv.removeAttribute('tabindex');
+    hint.textContent='Tap the number to call';
+    setTimeout(()=>{cv.style.display='none'},500);
+  }
+
+  cv.addEventListener('pointerdown',e=>{
+    if(revealed) return;
+    drawing=true; last=null; cv.setPointerCapture(e.pointerId);
+    scratchAt(pos(e)); e.preventDefault();
+  });
+  cv.addEventListener('pointermove',e=>{if(drawing&&!revealed)scratchAt(pos(e));});
+  function end(){
+    if(!drawing) return;
+    drawing=false; last=null;
+    if(cleared()>0.4) reveal();
+  }
+  cv.addEventListener('pointerup',end);
+  cv.addEventListener('pointercancel',end);
+  cv.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();reveal();}
+  });
+
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(paint);
+  paint();
+  addEventListener('resize',()=>{if(!revealed)paint();});
+})();
+
+// ---------- WhatsApp warning modal ----------
+(function(){
+  const modal=document.getElementById('waModal'),
+        go=document.getElementById('waGo'),
+        cancel=document.getElementById('waCancel');
+  let opener=null;
+
+  function open(from){
+    opener=from||null;
+    modal.hidden=false;
+    requestAnimationFrame(()=>modal.classList.add('show'));
+    document.body.style.overflow='hidden';
+    go.focus();
+  }
+  function close(){
+    modal.classList.remove('show');
+    document.body.style.overflow='';
+    setTimeout(()=>{modal.hidden=true},250);
+    if(opener&&opener.focus)opener.focus();
+  }
+
+  document.querySelectorAll('[data-wa]').forEach(el=>{
+    el.addEventListener('click',e=>{e.preventDefault();open(el);});
+  });
+
+  go.addEventListener('click',()=>{
+    const url='https://wa.me/'+phoneIntl()+'?text='+encodeURIComponent(WA_MSG);
+    window.open(url,'_blank','noopener');
+    close();
+  });
+  cancel.addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close();});
+  addEventListener('keydown',e=>{
+    if(modal.hidden) return;
+    if(e.key==='Escape') close();
+    if(e.key==='Tab'){ // keep focus inside the dialog
+      const f=[cancel,go], i=f.indexOf(document.activeElement);
+      e.preventDefault();
+      f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus();
+    }
+  });
+})();
+
+// ---------- Navbar background on scroll ----------
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 
-// Mobile menu
+// ---------- Mobile menu ----------
 const burger=document.getElementById('burger'),links=document.getElementById('links');
 function setMenu(open){
   links.classList.toggle('open',open);
@@ -370,7 +580,7 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(fa
 addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 addEventListener('resize',()=>{if(innerWidth>900)setMenu(false)});
 
-// Reveal on scroll (content stays visible if JS is off)
+// ---------- Reveal on scroll (content stays visible if JS is off) ----------
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}
 }),{threshold:.12});
